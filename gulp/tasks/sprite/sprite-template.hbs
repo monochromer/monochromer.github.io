@@ -1,0 +1,21 @@
+{{#spritesheet}}
+.icon {
+	display: inline-block;
+	font-size: 0;
+}
+	.icon::before {
+		content: '';
+		display: inline-block;
+		vertical-align: middle;
+		{{! background-image: url("../img/icons.png"); }}
+		background-image: url({{{escaped_image}}});
+	}
+{{/spritesheet}}
+
+{{#sprites}}
+		.icon-{{name}}::before {
+			width: {{px.width}};
+			height: {{px.height}};
+			background-position: {{px.offset_x}} {{px.offset_y}};
+		}
+{{/sprites}}

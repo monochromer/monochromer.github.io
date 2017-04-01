@@ -1,0 +1,17 @@
+{{#spritesheet}}
+$imgURL = "{{{escaped_image}}}"
+{{/spritesheet}}
+
+$sprite = {}
+
+{{#sprites}}
+$sprite["{{name}}"] = {}
+$sprite["{{name}}"]["width"] = {{px.width}}
+$sprite["{{name}}"]["height"] = {{px.height}}
+$sprite["{{name}}"]["position"] = {{px.offset_x}} {{px.offset_y}}
+{{/sprites}}
+
+sprite($iconName)
+	width: $sprite[$iconName].width
+	height: $sprite[$iconName].height
+	background-position: $sprite[$iconName].position

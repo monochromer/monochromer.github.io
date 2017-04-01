@@ -1,0 +1,14 @@
+build
+design
+bower_components
+node_modules
+.vscode
+.DS_Store
+*.log
+*.sublime-*
+*.rar
+*.zip
+*.7zip
+.idea
+.publish
+Thumbs.db

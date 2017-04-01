@@ -1,0 +1,24 @@
+@require "mixins";
+
+*
+  margin 0
+  padding 0
+
+header
+  display flex
+  flex-grow 1
+  opacity 1
+
+.header
+  position relative
+  background #fff
+  border-bottom 1px solid #ccc
+
+  +mq("medium")
+    position absolute
+
+  +mq("(orientation: portrait)")
+    position fixed
+
+  +mq("only screen and (min-width: 320px) and (max-width: 480px)")
+    width 100%

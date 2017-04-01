@@ -1,0 +1,241 @@
+/**
+ * Миксин для медиа-условий
+ */
+
+$media = {
+  medium: "(min-width: 992px)",
+  small: "(min-width: 768px)"
+}
+
+mq($mq)
+  if $mq in $media
+    $condition = $media[$mq]
+  else
+    $condition = $mq
+  @media $condition
+    {block}
+
+
+// https://css-tricks.com/snippets/css/retina-display-media-query/
+retina()
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)
+    {block}
+
+/**
+ * Прозрачность
+ */
+opacity($alpha)
+  //-khtml-opacity $alpha
+  //-moz-opacity $alpha
+  opacity $alpha
+  if ie
+    -ms-filter unquote('"progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round($alpha * 100) + ')"') // IE 8
+    filter unquote('alpha(opacity=' + round($alpha * 100) + ')') //IE 5-7
+
+
+
+/**
+ * Сетка
+
+@require "grid"
+
+$settings = {
+  cols: 12,
+  gutter: 30px,
+  max-width: 960px,
+  $media: {
+    xs: 0,
+    sm: 480px,
+    md: 768px,
+    lg: 940px
+  }
+}
+
+newGrid($settings)
+ */
+
+newGrid(opts)
+
+  generate-cols($size-name, $cols)
+
+    .grid--{$size-name}--space-around > .grid__cell
+      padding-left: (opts.gutter/2)
+      padding-right: (opts.gutter/2)
+
+    .grid--{$size-name}--space-between
+      margin-left: - (opts.gutter/2)
+      margin-right: - (opts.gutter/2)
+
+    .grid--{$size-name}--space-between > .grid__cell
+      padding-left: (opts.gutter/2)
+      padding-right: (opts.gutter/2)
+
+    .grid--{$size-name}--reverse > .grid__cell
+      float right
+
+    [class*=\"grid__cell--{$size-name}"]
+      float left
+
+    .grid__cell--{$size-name}--center
+      float none
+      margin-left auto
+      margin-right auto
+
+    .grid__cell--{$size-name}--reset
+      float left
+      margin-left 0
+      margin-right 0
+
+    .grid--{$size-name}--reverse > .grid__cell--{$size-name}--reset
+      float right
+
+    for $i in (1..$cols)
+      .grid__cell--{$size-name}--w_{$i}-{$cols}
+        width ($i/$cols)*100%
+
+    for $i in (0..$cols)
+      .grid__cell--{$size-name}--left_{$i}-{$cols}
+        margin-left ($i/$cols)*100%
+
+      .grid__cell--{$size-name}--right_{$i}-{$cols}
+        margin-right ($i/$cols)*100%
+
+      .grid__cell--{$size-name}--push_{$i}-{$cols}
+        left ($i/$cols)*100%
+
+      .grid__cell--{$size-name}--pull_{$i}-{$cols}
+        right ($i/$cols)*100%
+
+
+  .grid-container
+    max-width: opts.max-width if opts.max-width
+    margin-left auto
+    margin-right auto
+    padding-left: (opts.gutter/2)
+    padding-right: (opts.gutter/2)
+
+
+  .grid
+    cf()
+    margin-left: 0
+    margin-right: 0
+
+    &__cell
+      box-sizing border-box
+      display block
+      padding-left 0
+      padding-right 0
+      position relative
+
+    // &--space-between
+    //   margin-left: - (opts.gutter/2)
+    //   margin-right: - (opts.gutter/2)
+
+    // &--space-between &__cell
+    //   padding-left: (opts.gutter/2)
+    //   padding-right: (opts.gutter/2)
+
+    // &--space-around &__cell
+    //   padding-left: (opts.gutter/2)
+    //   padding-right: (opts.gutter/2)
+
+
+  for key, value in opts.$media
+    if !value
+      generate-cols(key, opts.cols)
+    else
+      @media (min-width: value)
+        generate-cols(key, opts.cols)()
+
+newGrid(opts)
+
+  generate-cols($size-name, $cols)
+
+    .grid--{$size-name}--space-around > .grid__cell
+      padding-left: (opts.gutter/2)
+      padding-right: (opts.gutter/2)
+
+    .grid--{$size-name}--space-between
+      margin-left: - (opts.gutter/2)
+      margin-right: - (opts.gutter/2)
+
+    .grid--{$size-name}--space-between > .grid__cell
+      padding-left: (opts.gutter/2)
+      padding-right: (opts.gutter/2)
+
+    .grid--{$size-name}--reverse > .grid__cell
+      float right
+
+    [class*=\"grid__cell--{$size-name}"]
+      float left
+
+    .grid__cell--{$size-name}--center
+      float none
+      margin-left auto
+      margin-right auto
+
+    .grid__cell--{$size-name}--reset
+      float left
+      margin-left 0
+      margin-right 0
+
+    .grid--{$size-name}--reverse > .grid__cell--{$size-name}--reset
+      float right
+
+    for $i in (1..$cols)
+      .grid__cell--{$size-name}--w_{$i}-{$cols}
+        width ($i/$cols)*100%
+
+    for $i in (0..$cols)
+      .grid__cell--{$size-name}--left_{$i}-{$cols}
+        margin-left ($i/$cols)*100%
+
+      .grid__cell--{$size-name}--right_{$i}-{$cols}
+        margin-right ($i/$cols)*100%
+
+      .grid__cell--{$size-name}--push_{$i}-{$cols}
+        left ($i/$cols)*100%
+
+      .grid__cell--{$size-name}--pull_{$i}-{$cols}
+        right ($i/$cols)*100%
+
+
+  .grid-container
+    max-width: opts.max-width if opts.max-width
+    margin-left auto
+    margin-right auto
+    padding-left: (opts.gutter/2)
+    padding-right: (opts.gutter/2)
+
+
+  .grid
+    cf()
+    margin-left: 0
+    margin-right: 0
+
+    &__cell
+      box-sizing()
+      display block
+      padding-left 0
+      padding-right 0
+      position relative
+
+    // &--space-between
+    //   margin-left: - (opts.gutter/2)
+    //   margin-right: - (opts.gutter/2)
+
+    // &--space-between &__cell
+    //   padding-left: (opts.gutter/2)
+    //   padding-right: (opts.gutter/2)
+
+    // &--space-around &__cell
+    //   padding-left: (opts.gutter/2)
+    //   padding-right: (opts.gutter/2)
+
+
+  for key, value in opts.$media
+    if !value
+      generate-cols(key, opts.cols)
+    else
+      @media (min-width: value)
+        generate-cols(key, opts.cols)

@@ -1,0 +1,40 @@
+{
+  "name": "monochromer.github.io",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "gulp dev",
+    "gulp-info": "gulp --version && gulp --tasks"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monochromer/monochromer.github.io.git"
+  },
+  "author": "monochromer",
+  "bugs": {
+    "url": "https://github.com/monochromer/monochromer.github.io/issues"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.7",
+    "browser-sync": "^2.18.8",
+    "css-mqpacker": "^5.0.1",
+    "del": "^2.2.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-cli": "^1.2.2",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-newer": "^1.3.0",
+    "gulp-notify": "^3.0.0",
+    "gulp-postcss": "^6.3.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-stylus": "^2.6.0",
+    "gulp-svg-sprite": "^1.3.6",
+    "gulp-util": "^3.0.8",
+    "gulp-zip": "^4.0.0",
+    "gulp.spritesmith": "^6.4.0",
+    "postcss-csso": "^1.1.2",
+    "stream-combiner2": "^1.1.1",
+    "vinyl-buffer": "^1.0.0"
+  }
+}
