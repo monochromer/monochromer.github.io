@@ -1,7 +1,7 @@
 /**
  * Обработка шрифтов
  */
-module.exports = (gulp, plugins, config) => () => {
+module.exports = (gulp, plugins, config) => (done) => {
   return plugins.combiner(
       gulp.src(config.src, {
         since: gulp.lastRun(config.taskName)

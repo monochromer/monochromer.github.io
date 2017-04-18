@@ -40,14 +40,14 @@ const defineTask = (gulp, plugins) => (config) => {
       }
     };
 
-    let gulpFunc = callback => {
+    let gulpFunc = done => {
       let taskFn = require(path.resolve(config.taskPath))(gulp, plugins, taskConfig);
-      var taskResult = taskFn();
-      if (typeof taskResult.then === 'function') {
-        taskResult.then(callback);
-      } else {
-        callback();
-      }
+      return taskFn(done);
+      // if (typeof taskResult.then === 'function') {
+      //   taskResult.then(done);
+      // } else {
+      //   done();
+      // }
     };
 
     if (taskConfig.description) gulpFunc.description = taskConfig.description;

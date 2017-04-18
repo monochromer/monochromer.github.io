@@ -1,5 +1,5 @@
 
-module.exports = (gulp, plugins, config) => () => {
+module.exports = (gulp, plugins, config) => (done) => {
   var buffer = require('vinyl-buffer');
 
   var spriteData = gulp.src(config.src)

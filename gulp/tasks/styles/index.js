@@ -9,7 +9,7 @@ module.exports = (gulp, plugins, config) => {
       : []
     ).map(pluginName => require(pluginName)(config.plugins[pluginName]))
 
-  return () => {
+  return (done) => {
     return plugins.combiner([
       gulp.src(config.src),
       plugins.if(!config.isProduction, plugins.sourcemaps.init(), plugins.util.noop()),
