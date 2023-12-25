@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" class="page">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title @text="title"></title>
+  <meta property="og:title" :content="title">
+  <meta webc:if="description" property="og:description" name="description" :content="description">
+  <template webc:if="image" webc:nokeep>
+    <meta name="twitter:card" content=summary_large_image>
+    <meta property="og:image" :content="image">
+  </template>
+
+  <link rel="icon" href="/assets/favicon.ico">
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/icon-180.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+
+  <script webc:is="webc-page-script" webc:nokeep></script>
+  <style webc:is="webc-page-style" webc:nokeep></style>
+  <style @raw="getBundle('css')" webc:keep></style>
+</head>
+<body class="page__body">
+  <webc-header class="page__header">
+    <webc-logo class="header__logo" @hidden-text="Главная страница"></webc-logo>
+
+    <webc-main-nav class="header__nav" :@items="[{ text: 'Публикации', link: '/articles/'}, { text: 'О сайте', link: '/about/'}]"></webc-main-nav>
+  </webc-header>
+
+  <main class="page__main">
+    <slot></slot>
+  </main>
+
+  <webc-footer :@build-year="meta?.buildYear" class="page__footer"></webc-footer>
+
+  <script @raw="getBundle('js')" webc:keep></script>
+</body>
+</html>

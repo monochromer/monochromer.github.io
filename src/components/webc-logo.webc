@@ -1,0 +1,17 @@
+<a class="logo" href="/" webc:root="override" :aria-label="hiddenText">
+  <img class="logo__image" src="/assets/icon.svg" width="48px" height="48px" alt="Логотип сайта">
+</a>
+
+<style>
+.logo {
+  display: block;
+  text-decoration: none;
+}
+
+.logo__image {
+  display: block;
+  aspect-ratio: 1;
+  width: clamp(48px, 3rem, 64px);
+  height: auto;
+}
+</style>

@@ -1,0 +1,16 @@
+<script webc:type="js" webc:root="override">
+  let tag = webc?.attributes?.tag ?? 'span';
+
+  `
+    <${tag} class="visually-hidden">
+      <slot></slot>
+    </${tag}>
+  `;
+</script>
+
+<style>
+.visually-hidden {
+  position: fixed;
+  transform: scale(0);
+}
+</style>

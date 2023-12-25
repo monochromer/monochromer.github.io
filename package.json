@@ -1,0 +1,12 @@
+{
+  "name": "monochromer.github.io",
+  "scripts": {
+    "start": "eleventy --serve --watch",
+    "start:incremental": "eleventy --serve --watch --incremental --ignore-initial",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-webc": "^0.11.0"
+  }
+}

@@ -1,0 +1,8 @@
+<webc-visually-hidden @tag="h1">
+  Monochromer
+</webc-visually-hidden>
+
+<section>
+  <h2>Последние статьи</h2>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit reiciendis id laborum dolorem culpa officiis sint rerum repellat dolores saepe asperiores possimus qui, laudantium suscipit! Dicta eius non temporibus repellendus?</p>
+</section>

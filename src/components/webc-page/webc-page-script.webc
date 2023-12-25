@@ -1,0 +1,8 @@
+<script webc:raw>
+  function calcSize() {
+    document.documentElement.style.setProperty('--viewport', window.innerWidth)
+  }
+  calcSize()
+  window.addEventListener('resize', calcSize)
+  window.screen?.orientation?.addEventListener('change', calcSize)
+</script>

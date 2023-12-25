@@ -1,0 +1,141 @@
+<style>
+  .page {
+    --min-viewport: 576;
+    --max-viewport: 1400;
+
+    --viewport: var(calc((var(--max-viewport) - var(--min-viewport)) / 2));
+
+    --clamped-viewport: clamp(var(--min-viewport), var(--viewport), var(--max-viewport));
+    --viewport-ratio: ((var(--clamped-viewport) - var(--min-viewport)) / (var(--max-viewport) - var(--min-viewport)));
+  }
+
+  @media (min-width: calc(576 + (1440 - 576) * 0)) {
+    .page {
+      --viewport: calc((576 + (1440 - 576) * 0) * 1px);
+    }
+  }
+
+  @media (min-width: calc(576 + (1440 - 576) * 0.25)) {
+    .page {
+      --viewport: calc((576 + (1440 - 576) * 0.25) * 1px);
+    }
+  }
+
+  @media (min-width: calc(576 + (1440 - 576) * 0.5)) {
+    .page {
+      --viewport: calc((576 + (1440 - 576) * 0.5) * 1px);
+    }
+  }
+
+  @media (min-width: calc(576 + (1440 - 576) * 0.75)) {
+    .page {
+      --viewport: calc((576 + (1440 - 576) * 0.75) * 1px);
+    }
+  }
+
+  @media (min-width: calc(576 + (1440 - 576) * 1)) {
+    .page {
+      --viewport: calc((576 + (1440 - 576) * 1) * 1px);
+    }
+  }
+
+  .page {
+    --type-mult-minor-second: 1.067;
+    --type-mult-major-second: 1.125;
+    --type-mult-minor-third: 1.2;
+    --type-mult-major-third: 1.25;
+    --type-mult-perfect-fourth: 1.333;
+    --type-mult-augmented-fourth: 1.414;
+    --type-mult-perfect-fifth: 1.5;
+    --type-mult-golden-ratio: 1.618;
+    --type-mult-major-sixth: 1.667;
+    --type-mult-minor-seventh: 1.778;
+    --type-mult-major-seventh: 1.875;
+    --type-mult-octave: 2;
+
+    --type-mult: var(--type-mult-perfect-fourth);
+    --type-mult: var(--type-mult-minor-third);
+    --type-mult: var(--type-mult-major-third);
+
+    --min-type-m: 1rem;
+    --max-type-m: 1.25rem;
+    --type-xs: calc(var(--type-s) / var(--type-mult));
+    --type-s: calc(var(--type-m) / var(--type-mult));
+    --type-m: calc(var(--min-type-m) + var(--viewport-ratio) * (var(--max-type-m) - var(--min-type-m)));
+    --type-l: calc(var(--type-m) * var(--type-mult));
+    --type-xl: calc(var(--type-l) * var(--type-mult));
+    --type-xxl: calc(var(--type-xl) * var(--type-mult));
+  }
+
+  .page {
+    --font-main: ui-system, BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace;
+    --font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+  .page {
+    --color-text: hsl(36deg 10% 20%);
+    --color-background: hsl(36deg 92% 86%);
+  }
+
+  .page {
+    -webkit-text-size-adjust: 100%;
+    font-family: var(--font-main, sans-serif);
+    line-height: 1.25;
+    color: var(--color-text);
+    background-color: var(--color-background);
+  }
+
+  .page__body {
+    margin: 0 auto;
+    max-inline-size: 92ch;
+    padding-inline: clamp(8px, 1.25rem, 24px);
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+  }
+
+  .page__header {
+    grid-area: header;
+  }
+
+  .page__main {
+    grid-area: main;
+  }
+
+  .page__footer {
+    grid-area: footer;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    font-size: var(--type-m);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--type-m);
+  }
+
+  h3 {
+    font-size: var(--type-l);
+  }
+
+  h2 {
+    font-size: var(--type-xl);
+  }
+
+  h1 {
+    font-size: var(--type-xxl);
+  }
+</style>
