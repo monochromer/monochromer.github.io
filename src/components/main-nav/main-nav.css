@@ -1,0 +1,30 @@
+
+.main-nav {
+  font-size: var(--type-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.main-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style-type: '';
+  display: flex;
+  align-items: baseline;
+}
+
+.main-nav__item {}
+
+.main-nav__link {
+  --_link-color: var(--color-fade);
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  color: var(--_link-color);
+  transition: 125ms;
+
+  &:hover {
+    --_link-color: var(--color-accent);
+  }
+}

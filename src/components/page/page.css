@@ -1,0 +1,156 @@
+.page {
+  --viewport-ratio: 0;
+}
+
+@media (min-width: calc((576 + (1440 - 576) * 0) * 1em / 16)) {
+  .page {
+    --viewport-ratio: 0;
+  }
+}
+
+@media (min-width: calc((576 + (1440 - 576) * 0.25) * 1em / 16)) {
+  .page {
+    --viewport-ratio: 0.25;
+  }
+}
+
+@media (min-width: calc((576 + (1440 - 576) * 0.5) * 1em / 16)) {
+  .page {
+    --viewport-ratio: 0.5;
+  }
+}
+
+@media (min-width: calc((576 + (1440 - 576) * 0.75) * 1em / 16)) {
+  .page {
+    --viewport-ratio: 0.75;
+  }
+}
+
+@media (min-width: calc((576 + (1440 - 576) * 1) * 1em / 16)) {
+  .page {
+    --viewport-ratio: 1;
+  }
+}
+
+.page {
+  --max-container-size: 780;
+  --min-viewport-width: 576;
+  --max-viewport-width: 1440;
+
+  --_font-size-factor: var(--font-size-factor, 1);
+  --_min-viewport-width: calc(var(--min-viewport-width) * var(--_font-size-factor));
+  --_max-viewport-width: calc(var(--max-viewport-width) * var(--_font-size-factor));
+
+  --viewport-width: calc((var(--_max-viewport-width) - var(--_min-viewport-width)) / 2); /* no js fallback */
+
+  --_clamped-viewport-width: clamp(var(--_min-viewport-width), var(--viewport-width), var(--_max-viewport-width));
+  --viewport-ratio: ((var(--_clamped-viewport-width) - var(--_min-viewport-width)) / (var(--_max-viewport-width) - var(--_min-viewport-width)));
+}
+
+.page {
+  --type-scale-prima            : 1;
+  --type-scale-minor-second     : 1.067;
+  --type-scale-major-second     : 1.125;
+  --type-scale-minor-third      : 1.2;
+  --type-scale-major-third      : 1.25;
+  --type-scale-perfect-fourth   : 1.333;
+  --type-scale-augmented-fourth : 1.414;
+  --type-scale-perfect-fifth    : 1.5;
+  --type-scale-golden-ratio     : 1.618;
+  --type-scale-major-sixth      : 1.667;
+  --type-scale-minor-seventh    : 1.778;
+  --type-scale-major-seventh    : 1.875;
+  --type-scale-octave           : 2;
+
+  /* --type-mult: var(--type-mult-perfect-fourth); */
+  /* --type-mult: var(--type-mult-minor-third); */
+  --type-mult: var(--type-mult-major-third);
+
+  --min-type-m: calc(16 / 16 * 1rem);
+  --max-type-m: calc(20 / 16 * 1rem);
+  --type-xs: calc(var(--type-s) / var(--type-scale-minor-third));
+  --type-s: calc(var(--type-m) / var(--type-scale-minor-third));
+  --type-m: calc(var(--min-type-m) + var(--viewport-ratio) * (var(--max-type-m) - var(--min-type-m)));
+  --type-l: calc(var(--type-m) * var(--type-scale-minor-third));
+  --type-xl: calc(var(--type-l) * var(--type-scale-major-third));
+  --type-xxl: calc(var(--type-xl) * var(--type-scale-major-third));
+  /* --type-xs: calc(var(--type-s) / var(--type-scale-minor-second));
+  --type-s: calc(var(--type-m) / var(--type-scale-minor-second));
+  --type-m: calc(var(--min-type-m) + var(--viewport-ratio) * (var(--max-type-m) - var(--min-type-m)));
+  --type-l: calc(var(--type-m) * var(--type-scale-minor-second));
+  --type-xl: calc(var(--type-l) * var(--type-scale-major-second));
+  --type-xxl: calc(var(--type-xl) * var(--type-scale-major-second)); */
+}
+
+.page {
+  --font-main: ui-system, BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace;
+  --font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.page {
+  --color-dark: hsl(36deg 10% 20%);
+  --color-fade: hsl(22deg 40% 25%);
+  --color-accent: hsl(22deg 80% 40%);
+  --color-light: hsl(36deg 92% 86%);
+}
+
+.page {
+  position: relative;
+  overflow-y: scroll;
+  overscroll-behavior: none;
+  text-size-adjust: 100%;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+
+  &::after {
+    --_tile-size: 64px;
+    content: "";
+    opacity: 0.008;
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/noise.png');
+    background-size: calc(var(--_tile-size) * 2);
+    pointer-events: none;
+  }
+
+  @supports (scrollbar-gutter: stable) {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+}
+
+.page__body {
+  --body-padding: clamp(8px, 1.25rem, 32px);
+  --body-elements-gap: clamp(16px, 10%, 160px);
+  margin: 0;
+  position: relative;
+  padding-inline: var(--body-padding);
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr minmax(0, calc(var(--max-container-size) / 16 * 1rem)) 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    ". header ."
+    ". main   ."
+    ". footer .";
+  font-family: var(--font-main, sans-serif);
+}
+
+.page__header {
+  grid-area: header;
+  margin-block-end: var(--body-elements-gap);
+}
+
+.page__main {
+  grid-area: main;
+  font-size: var(--type-m);
+  line-height: 1.5;
+}
+
+.page__footer {
+  margin-block-start: var(--body-elements-gap);
+  grid-area: footer;
+}

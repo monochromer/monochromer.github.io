@@ -1,0 +1,30 @@
+.title {
+  line-height: 1.1;
+  font-weight: 600;
+  text-wrap: balance;
+  color: var(--color-fade);
+}
+
+.title_level_1 {
+  font-size: var(--type-xxl);
+}
+
+.title_level_2 {
+  font-size: var(--type-xl);
+}
+
+.title_level_3 {
+  font-size: var(--type-l);
+}
+
+.title_level_4 {
+  font-size: var(--type-m);
+}
+
+.title_level_5 {
+  font-size: var(--type-s);
+}
+
+.title_level_6 {
+  font-size: var(--type-xs);
+}

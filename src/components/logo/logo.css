@@ -1,0 +1,12 @@
+.logo {
+  display: block;
+  text-decoration: none;
+}
+
+.logo__image {
+  display: block;
+  aspect-ratio: 1;
+  width: clamp(48px, 2rem + var(--viewport-ratio) * 1rem, 64px);
+  height: auto;
+  border-radius: 50%;
+}

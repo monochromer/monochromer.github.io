@@ -1,0 +1,16 @@
+.code-block {
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, currentColor, transparent 92%);
+  font-size: 0.8em;
+  font-family: var(--font-mono);
+  border-radius: 8px;
+  background-color: hsl(0 0% 100% / 0.12);
+}
+
+.code-block__content {
+  overflow: auto;
+  padding: var(--body-padding, 1em);
+  display: block;
+  font: inherit;
+}

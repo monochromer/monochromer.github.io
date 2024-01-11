@@ -1,0 +1,13 @@
+.index-block {}
+
+.index-block__title {
+  margin-block-start: 0;
+  margin-block-end: clamp(24px, 48 / var(--max-container-size) * 100%, 64px);
+}
+
+.index-block__footer {
+  margin-block-start: clamp(24px, 32 / var(--max-container-size) * 100%, 64px);
+  margin-inline: auto;
+  display: block;
+  max-width: max-content;
+}

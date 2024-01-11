@@ -1,0 +1,9 @@
+.divider {
+  all: unset;
+  opacity: 0.4;
+  margin-block: clamp(24px, 48 / var(--max-container-size) * 100%, 48px);
+  display: block;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}

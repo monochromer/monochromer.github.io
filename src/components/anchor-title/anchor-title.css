@@ -1,0 +1,34 @@
+.anchor-title {
+  --_is-link-visible: 0;
+  position: relative;
+}
+
+.anchor-title__link {
+  --_anchor-title-link-x: calc(100% * (1 - var(--_is-link-visible)));
+  --_anchor-title-link-y: 0;
+  --_anchor-title-link-gutter: 0.1em;
+  opacity: var(--_is-link-visible);
+  transform: translate(var(--_anchor-title-link-x), var(--_anchor-title-link-y));
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-right: var(--_anchor-title-link-gutter);
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: 0.2s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    inset-inline-end: calc(-1 * var(--_anchor-title-link-gutter));
+  }
+
+  @supports (top: 1lh) {
+    --_anchor-title-link-y: calc(0.5lh - 50%);
+  }
+}
+
+.anchor-title:where(:hover, :focus-within) {
+  --_is-link-visible: 1;
+}

@@ -1,3 +1,0 @@
-<webc-page :@title="title" :@description="description" :@image="null" :@meta="meta">
-  <template @html="content" webc:nokeep></template>
-</webc-page>

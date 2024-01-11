@@ -1,0 +1,9 @@
+.article-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: '';
+  display: grid;
+  gap: clamp(16px, 3rem, 64px);
+}
+
+.article-list__item {}

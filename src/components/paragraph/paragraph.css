@@ -1,0 +1,12 @@
+.paragraph {
+  font-size: var(--type-m);
+  line-height: 1.5;
+
+  &:first-child {
+    margin-block-start: 0;
+  }
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
