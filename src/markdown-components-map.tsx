@@ -6,7 +6,7 @@ import { CodeBlock } from '@/components/code-block/code-block';
 import { Link } from '@/components/link/link';
 import { InlineCode } from '@/components/inline-code/inline-code';
 import { AnchorTitle } from '@/components/anchor-title/anchor-title';
-import { Divider } from './components/divider/Divider';
+import { Divider } from '@/components/divider/divider';
 
 function createTitleComponent(level) {
   return (props) => {
