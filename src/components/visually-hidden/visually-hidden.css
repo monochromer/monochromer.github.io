@@ -1,4 +1,8 @@
 .visually-hidden {
   position: fixed;
   transform: scale(0);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
 }
