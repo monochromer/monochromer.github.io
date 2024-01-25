@@ -30,8 +30,8 @@ export const CodeBlock: ComponentType<CodeBlockProps> = (props) => {
   })
 
   return (
-    <pre className={clsx('code-block', className)} data-lang={language} tabIndex={0}>
-      <code className={'code-block__content'} dangerouslySetInnerHTML={{ __html: highlightCode }} />
+    <pre className={clsx('code-block', className)} data-lang={language}>
+      <code className={'code-block__content'} dangerouslySetInnerHTML={{ __html: highlightCode }} tabIndex={0} />
     </pre>
   )
 }

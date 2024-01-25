@@ -6,6 +6,11 @@
   font-family: var(--font-mono);
   border-radius: 8px;
   background-color: hsl(0 0% 100% / 0.12);
+
+  &:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in hsl, var(--color-accent), transparent 88%);
+  }
 }
 
 .code-block__content {
@@ -13,4 +18,5 @@
   padding: var(--body-padding, 1em);
   display: block;
   font: inherit;
+  outline: none;
 }
