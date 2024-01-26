@@ -7,6 +7,7 @@ import { Link } from '@/components/link/link';
 import { InlineCode } from '@/components/inline-code/inline-code';
 import { AnchorTitle } from '@/components/anchor-title/anchor-title';
 import { Divider } from '@/components/divider/divider';
+import { OrderedList, UnorderedList, ListItem } from '@/components/list/list';
 
 function createTitleComponent(level) {
   return (props) => {
@@ -54,5 +55,8 @@ export default {
       ? <CodeBlock className={clsx('article__code-block', props.className)} language={lang} codeText={code}/>
       : null
   },
-  'hr': Divider
+  'hr': Divider,
+  'li': ListItem,
+  'ul': UnorderedList,
+  'ol': OrderedList,
 }

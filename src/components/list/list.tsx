@@ -2,9 +2,9 @@ import type { ComponentProps, ComponentType, JSX } from "preact";
 import { clsx } from "clsx";
 
 export const ListItem: ComponentType<JSX.HTMLAttributes<HTMLLIElement>> = (props) => {
-  const { children, className, ...restProps} = props;
+  const { children, className } = props;
   return (
-    <li className={clsx("list__item", className)} {...restProps}>
+    <li className={clsx("list__item", className)}>
       {children}
     </li>
   )
@@ -15,9 +15,9 @@ type BaseListComponent<ListType extends (HTMLOListElement | HTMLUListElement)> =
 }
 
 export const OrderedList: BaseListComponent<HTMLOListElement> = (props) => {
-  const { children, className, ...restProps } = props;
+  const { children, className} = props;
   return (
-    <ol className={clsx("list", className)} {...restProps}>
+    <ol className={clsx("list", className)}>
       {children}
     </ol>
   )
@@ -26,9 +26,9 @@ export const OrderedList: BaseListComponent<HTMLOListElement> = (props) => {
 OrderedList.Item = ListItem;
 
 export const UnorderedList: BaseListComponent<HTMLUListElement> = (props) => {
-  const { children, className, ...restProps } = props;
+  const { children, className } = props;
   return (
-    <ul className={clsx("list", className)} {...restProps}>
+    <ul className={clsx("list", className)}>
       {children}
     </ul>
   )
