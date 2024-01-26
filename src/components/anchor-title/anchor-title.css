@@ -1,5 +1,6 @@
 .anchor-title {
   --_is-link-visible: 0;
+  scroll-margin-block: 1rem;
   position: relative;
 }
 
