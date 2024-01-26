@@ -1,0 +1,6 @@
+.list {
+  display: grid;
+  gap: clamp(8px, 8 / 20 * 1em, 16px);
+}
+
+.list__item {}

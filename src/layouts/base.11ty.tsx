@@ -34,7 +34,6 @@ export const BaseLayout = () => {
           items={[
             { text: 'Статьи', link: '/articles/'},
             { text: 'О сайте', link: '/about/'},
-            { text: 'RSS', link: '/rss-feed.xml'},
           ]}
         />
       </Header>

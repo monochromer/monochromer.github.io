@@ -1,5 +1,6 @@
 import { Link } from "@/components/link/link";
 import { IndexBlock } from "@/components/index-block/index-block";
+import { UnorderedList } from '@/components/list/list'
 
 export const data = {
   title: 'О сайте',
@@ -9,22 +10,38 @@ export const data = {
 
 export const AboutPage = () => {
   return (
-    <IndexBlock title={'Контакты'}>
-      <ul>
-        <li>
-          <Link href="https://t.me/drmonochromer" isExternal>Telegram</Link>
-        </li>
-        <li>
-          <Link href="https://twitter.com/DrMonochromer" isExternal>Twitter</Link>
-        </li>
-        <li>
-          <Link href="https://mastodon.social/@monochromer" isExternal>Mastodon</Link>
-        </li>
-        <li>
-          <Link href="mailto:hwk85tkvs@relay.firefox.com" isExternal>E-mail</Link>
-        </li>
-      </ul>
-    </IndexBlock>
+    <>
+      <IndexBlock title={'Контакты'}>
+        <UnorderedList>
+          <UnorderedList.Item>
+            <Link href="https://t.me/drmonochromer" isExternal>Telegram</Link>
+          </UnorderedList.Item>
+          <UnorderedList.Item>
+            <Link href="https://twitter.com/DrMonochromer" isExternal>Twitter</Link>
+          </UnorderedList.Item>
+          <UnorderedList.Item>
+            <Link href="https://mastodon.social/@monochromer" isExternal>Mastodon</Link>
+          </UnorderedList.Item>
+          <UnorderedList.Item>
+            <Link href="mailto:hwk85tkvs@relay.firefox.com" isExternal>E-mail</Link>
+          </UnorderedList.Item>
+          <UnorderedList.Item>
+            <Link href="https://github.com/monochromer" isExternal>Github</Link>
+          </UnorderedList.Item>
+        </UnorderedList>
+      </IndexBlock>
+
+      <IndexBlock title={'Ссылки'}>
+        <UnorderedList>
+          <UnorderedList.Item>
+            <Link href="https://github.com/monochromer/monochromer.github.io" isExternal>Репозиторий блога на Github</Link>
+          </UnorderedList.Item>
+          <UnorderedList.Item>
+            <Link href="/rss-feed.xml">RSS-лента с последними статьями</Link>
+          </UnorderedList.Item>
+        </UnorderedList>
+      </IndexBlock>
+    </>
   )
 }
 

@@ -1,4 +1,8 @@
-.index-block {}
+.index-block {
+  & + & {
+    margin-block-start: clamp(48px, 72 / var(--max-container-size) * 100%, 72px);
+  }
+}
 
 .index-block__title {
   margin-block-start: 0;
