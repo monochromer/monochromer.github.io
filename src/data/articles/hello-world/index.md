@@ -16,7 +16,7 @@ export const data = {
 export default function ArticlePage() {
   // в `data` находится каскад данных
   const { data } = useEleventyContext();
-  // `data.content` не строка, как в других Eleventy-шаблонизаторах, а компонент
+  // `data.content` не строка, как в других Eleventy-шаблонизаторах, а компонент. Вернее, набор компонентов.
   const Content = data.content;
 
   return (
@@ -41,7 +41,7 @@ export const BaseLayout = () => {
   const Content = data.content;
 
   return (
-    // `<!DOCTYPE html>` добавляется сам к результату рендеринга
+    // `<!DOCTYPE html>` добавляется автоматически к результату рендеринга
     <html>
       <head>
         <meta charSet="utf-8"/>  
@@ -59,15 +59,15 @@ export const BaseLayout = () => {
 }
 ```
 
-Для клиентских скриптов сам Preact пока не используется.
+Для клиентских скриптов сам Preact пока не применяется.
 
 ### Esbuild
 
-Для обработки CSS и JS используется [esbuild](https://esbuild.github.io/).
+Для обработки клиентского JS и CSS используется [esbuild](https://esbuild.github.io/).
 
 ## Кастомная обработка markdown
 
-В md-файлах не используется frontmatter-секция. Она заполняется во внешнем data-файле. Заголовок статьи пишется как `h1`, а выдержка (excerpt) располагается между двумя `<hr>`. Всё это нужно для лучшего чтения на внешних сервисах, например, на Github.
+В markdown-файлах отсутствует frontmatter-секция. Она заполняется во внешнем data-файле. Заголовок статьи пишется как `h1`, а выдержка (excerpt) располагается между двумя `<hr>`. Всё это нужно для более удобного чтения исходных файлов на внешних сервисах, например, на Github.
 
 ```markdown
 # Заголовок статьи
@@ -79,7 +79,7 @@ ___
 Основной контент
 ```
 
-Контентные markdown-блоки можно проецировать на Preact-компоненты. Можно получить доступ к оригинальному блоку c помощью DOM API и каскаду данных Eleventy:
+Контентные markdown-блоки можно проецировать на Preact-компоненты с возможностью получить доступ к оригинальному блоку c помощью DOM API и каскаду данных Eleventy:
 ```javascript
 export default {
   'p': (props) => {
@@ -95,7 +95,7 @@ export default {
 
 ## Подсветка блоков кода
 
-Для подсветки блоков кода используется [Shiki](https://github.com/shikijs/shiki). Подкупила возможность подключать в нём любые определения тем от редактора TextMate, которые также поддерживаются в Sublime Text и VS Code.
+Для подсветки блоков кода используется [Shiki](https://github.com/shikijs/shiki). Подкупила возможность подключать в нём любые определения тем в формате редактора TextMate, которые также поддерживаются в Sublime Text и VS Code. Выбрал [тему Gruvbox](https://marketplace.visualstudio.com/items?itemName=jdinhlife.gruvbox).
 
 ## Дизайн
 
@@ -103,7 +103,7 @@ export default {
 
 ## RSS
 
-В блоге есть [RSS-лента](/rss-feed.xml).
+За новыми статьями в блоге можно следить с помощью [RSS-ленты](/rss-feed.xml).
 
 ___
 
