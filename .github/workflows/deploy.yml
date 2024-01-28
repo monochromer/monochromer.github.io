@@ -25,10 +25,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # - name: Checkout
+      #   uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: '0'
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: '0'
+        run: |
+          git clone --depth 1 https://github.com/monochromer/monochromer.github.io.git .
+          git fetch --unshallow
 
       - name: Set up Node
         uses: actions/setup-node@v4
