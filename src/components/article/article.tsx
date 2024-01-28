@@ -1,24 +1,44 @@
 import { ComponentChild, ComponentType } from 'preact';
-import { dateToISO, formatDate } from '@/libs/dates';
+import { dateToISO, formatDate, getDatesDiff } from '@/libs/dates';
 import { Title } from '@/components/title/title';
+import ArticleMeta from '@/components/article-meta/article-meta';
 
 type ArticleProps = {
   title: ComponentChild;
   publishedAt: string | Date;
+  updatedAt: string | Date;
   excerpt?: ComponentChild;
   body: ComponentChild;
 }
 
+function needShowUpdatedDate(date1: string | Date, date2: string | Date) {
+  const ONE_DAY = 1000 * 60 * 60 * 24;
+  return getDatesDiff(date1, date2) >= ONE_DAY
+}
+
 export const Article: ComponentType<ArticleProps> = (props) => {
+  const showUpdatedDate = needShowUpdatedDate(props.publishedAt, props.updatedAt);
+
   return (
     <article className={'article'}>
       <header className="article__header">
         <Title className="article__title" level={1}>
           {props.title}
         </Title>
-        <time className={'article__date'} dateTime={dateToISO(props.publishedAt)}>
-          {formatDate(props.publishedAt)}
-        </time>
+        <ArticleMeta>
+          <ArticleMeta.Item name={'Опубликовано'}>
+            <time dateTime={dateToISO(props.publishedAt)}>
+              {formatDate(props.publishedAt)}
+            </time>
+          </ArticleMeta.Item>
+          {showUpdatedDate && (
+            <ArticleMeta.Item name={'Обновлено'}>
+              <time dateTime={dateToISO(props.updatedAt)}>
+                {formatDate(props.updatedAt)}
+              </time>
+            </ArticleMeta.Item>
+          )}
+        </ArticleMeta>
         {props.excerpt && (
           <div className="article__excerpt">
             {props.excerpt}

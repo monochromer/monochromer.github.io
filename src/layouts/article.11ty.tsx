@@ -13,6 +13,7 @@ export default function ArticlePage() {
     <Article
       title={<Content.TitleContent />}
       publishedAt={data.publishedAt}
+      updatedAt={data.updatedAt}
       excerpt={Content.Excerpt && <Content.Excerpt />}
       body={<Content.Body />}
     ></Article>

@@ -9,6 +9,7 @@ const config = require('./config');
 module.exports = function(eleventyConfig) {
   eleventyConfig.addWatchTarget('./src/**/*.css');
   eleventyConfig.addWatchTarget('./src/**/*.client.js');
+  eleventyConfig.addWatchTarget('./src/components/*.tsx');
   eleventyConfig.setServerOptions({
     domDiff: false
   });

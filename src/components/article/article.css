@@ -7,12 +7,6 @@
   margin-block-start: 0;
 }
 
-.article__date {
-  display: block;
-  max-width: max-content;
-  font-size: 0.8em;
-}
-
 .article__excerpt {
   margin-block-start: clamp(16px, 24 / var(--max-container-size) * 100%, 48px);
 }
