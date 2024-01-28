@@ -22,13 +22,9 @@ module.exports = {
     },
 
     updatedAt(data) {
-      const strategy = data.env.isDevelopmentMode ? TIMESTAMPS.FS_LAST_MODIFIED : TIMESTAMPS.GIT_LAST_MODIFIED;
-      const contentPath = getContentFolderPath(data);
-
-      console.log('debug: ', strategy, ', ', contentPath);
       return computeDate({
-        strategy,
-        contentPath
+        strategy: data.env.isDevelopmentMode ? TIMESTAMPS.FS_LAST_MODIFIED : TIMESTAMPS.GIT_LAST_MODIFIED,
+        contentPath: getContentFolderPath(data)
       })
     }
   }
