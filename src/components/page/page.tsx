@@ -17,6 +17,7 @@ export const Page: ComponentType<PageProps> = (props) => {
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="twitter:card" content="summary_large_image"/>
         <title>{props.title}</title>
         <meta property="og:title" content={props.title} />
         {props.description && (
@@ -25,7 +26,6 @@ export const Page: ComponentType<PageProps> = (props) => {
         {props.image && (
           <meta property="og:image" content={props.image} />
         )}
-        <meta name="twitter:card" content="summary_large_image"/>
         {props.headSlot}
       </head>
       <body className="page__body">
