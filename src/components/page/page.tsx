@@ -23,11 +23,9 @@ export const Page: ComponentType<PageProps> = (props) => {
           <meta property="og:description" name="description" content={props.description} />
         )}
         {props.image && (
-          <>
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta property="og:image" content={props.image} />
-          </>
+          <meta property="og:image" content={props.image} />
         )}
+        <meta name="twitter:card" content="summary_large_image"/>
         {props.headSlot}
       </head>
       <body className="page__body">

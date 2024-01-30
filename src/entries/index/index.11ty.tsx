@@ -49,7 +49,7 @@ export const data = {
               <ArticlePreview
                 url={article.data.page.url}
                 title={<Content.TitleContent />}
-                excerpt={<Content.Excerpt />}
+                excerpt={article.data.excerptElements?.length > 0 ? <Content.Excerpt /> : article.data.description}
                 publishedAt={article.data.publishedAt}
               />
             </ArticleList.Item>

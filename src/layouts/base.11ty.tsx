@@ -13,10 +13,11 @@ export const BaseLayout = () => {
     <Page
       title={data.title}
       description={data.description}
-      image={null}
+      image={data.meta.siteBaseLink + '/assets/social-cover.png'}
       meta={data.meta}
       headSlot={
         <>
+          <meta name="generator" content={data.eleventy.generator} />
           <link rel="manifest" href="/site.webmanifest" />
           <link rel="apple-touch-icon" href="/icon-180.png" />
           <link rel="icon" href="/icon.svg" type="image/svg+xml" />

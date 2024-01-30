@@ -9,6 +9,10 @@ module.exports = {
     },
 
     description(data) {
+      if (data.description) {
+        return data.description;
+      }
+
       const { excerptElements } = data;
 
       if (!excerptElements || !excerptElements.length) {
