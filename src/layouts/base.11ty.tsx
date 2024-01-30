@@ -18,6 +18,7 @@ export const BaseLayout = () => {
       headSlot={
         <>
           <meta name="generator" content={data.eleventy.generator} />
+          <link rel="me" href="https://mastodon.social/@monochromer" />
           <link rel="manifest" href="/site.webmanifest" />
           <link rel="apple-touch-icon" href="/icon-180.png" />
           <link rel="icon" href="/icon.svg" type="image/svg+xml" />
