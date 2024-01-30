@@ -9,7 +9,6 @@
 
 .article-preview__title {
   margin-block-start: 0;
-  /* margin-block-end: var(--_article-preview-gap); */
   margin-block-end: 10px;
   line-height: 1.35;
 }
@@ -20,13 +19,7 @@
   font-size: 0.8em;
 }
 
-.article-preview__link {
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-}
+.article-preview__link {}
 
 .article-preview__excerpt {
   margin-block-start: var(--_article-preview-gap);
