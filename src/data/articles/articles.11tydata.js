@@ -21,6 +21,14 @@ module.exports = {
         .join('. ');
     },
 
+    publishedAt(data) {
+      if (!data.publishedAt) {
+        return;
+      }
+
+      return new Date(data.publishedAt);
+    },
+
     updatedAt(data) {
       return computeDate({
         strategy: data.env.isDevelopmentMode ? TIMESTAMPS.FS_LAST_MODIFIED : TIMESTAMPS.GIT_LAST_MODIFIED,
