@@ -10,26 +10,21 @@ export const data = {
   title: 'Главная страница',
   articlesCountToDisplay: 5,
   eleventyComputed: {
-    sortedArticles(data) {
+    articlesToShow(data) {
       const articlesCollection = data?.collections?.articles;
       if (!articlesCollection || !articlesCollection.length) {
         return null;
       }
-      return articlesCollection.toSorted((a, b) => b.data.publishedAt - a.data.publishedAt);
-    },
-
-    articles(data) {
-      const { sortedArticles } = data;
-      if (!sortedArticles || !sortedArticles.length) {
+      if (!articlesCollection || !articlesCollection.length) {
         return null;
       }
-      return sortedArticles.slice(0, data.articlesCountToDisplay);
+      return articlesCollection.slice(0, data.articlesCountToDisplay);
     },
 
     needShowAllArticlesLink(data) {
       const articlesCollection = data?.collections?.articles;
-      const { sortedArticles } = data;
-      return sortedArticles.length > articlesCollection.length;
+      const { articlesToShow } = data;
+      return articlesToShow.length > articlesCollection.length;
     }
   }
 }
@@ -47,7 +42,7 @@ export const data = {
       }
     >
       <ArticleList>
-        {data.articles.map((article) => {
+        {data.articlesToShow.map((article) => {
           const Content = article.content;
           return (
             <ArticleList.Item>

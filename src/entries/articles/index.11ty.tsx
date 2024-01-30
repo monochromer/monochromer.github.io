@@ -7,17 +7,6 @@ export const data = {
   layout: 'base',
   title: 'Все статьи',
   permalink: '/articles/',
-  eleventyComputed: {
-    articles(data) {
-      const articlesCollection = data?.collections?.articles;
-
-      if (!articlesCollection || !articlesCollection.length) {
-        return null;
-      }
-
-      return articlesCollection.toSorted((a, b) => b.data.publishedAt - a.data.publishedAt);
-    }
-  }
 }
 
 export const ArticlesPage = () => {
@@ -26,7 +15,7 @@ export const ArticlesPage = () => {
   return (
     <IndexBlock title={data.title}>
       <ArticleList>
-        {data.articles.map((article) => {
+        {data.collections.articles.map((article) => {
           const Content = article.content;
           return (
             <ArticleList.Item>

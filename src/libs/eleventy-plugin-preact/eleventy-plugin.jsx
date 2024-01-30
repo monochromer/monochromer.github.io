@@ -3,7 +3,6 @@ const fs = require('node:fs');
 const { parseHTML } = require('linkedom');
 const frontMatter = require('gray-matter');
 const markdownIt = require('markdown-it');
-const shiki = require('shiki');
 const { renderPage } = require('./render.tsx');
 const { EleventyContextProvider } = require('./context.tsx');
 const { defaultComponents, FallbackComponent } = require('./makrdown-content.tsx');
@@ -30,6 +29,7 @@ function prepareEleventyContext(eleventyConfig, data) {
 }
 
 module.exports = function(eleventyConfig, pluginOptions = {}) {
+  /** @type {import('shiki').Highlighter} */
   let codeHightlighter;
 
   const dataParsers = [
@@ -122,10 +122,16 @@ module.exports = function(eleventyConfig, pluginOptions = {}) {
     },
 
     async init() {
+      const shiki = await import('shiki');
       const themeSchemeFilePath = path.join(__dirname, 'code-themes', 'gruvbox-light-soft.json');
       const themeScheme = JSON.parse(fs.readFileSync(themeSchemeFilePath, 'utf-8'));
       codeHightlighter = await shiki.getHighlighter({
-        theme: themeScheme,
+        themes: [themeScheme],
+        langs: Object.keys(shiki.bundledLanguages),
+        langAlias: {
+          'njk': 'liquid',
+          'nunjucks': 'liquid',
+        },
       });
     },
 
@@ -178,12 +184,15 @@ module.exports = function(eleventyConfig, pluginOptions = {}) {
     }
   })
 
-  eleventyConfig.addJavaScriptFunction('codeHighlight', (content, lang, renderOptions) => {
+  eleventyConfig.addJavaScriptFunction('codeHighlight', (content, lang, options) => {
     if (!lang) {
       return content;
     }
-    const tokens = codeHightlighter.codeToThemedTokens(content, lang);
-    return shiki.renderToHtml(tokens, renderOptions);
+    return codeHightlighter.codeToHtml(content, {
+      lang,
+      theme: 'Gruvbox Light Soft',
+      ...options,
+    });
   });
 
   const templateFormats = pluginOptions.templateFormats ?? ['jsx', 'tsx'];

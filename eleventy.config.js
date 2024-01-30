@@ -95,7 +95,9 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addCollection('articles', (collectionAPI) => {
-    return collectionAPI.getFilteredByGlob('src/data/articles/*/index.md');
+    return collectionAPI
+      .getFilteredByGlob('src/data/articles/*/index.md')
+      .toSorted((a, b) => b.data.publishedAt - a.data.publishedAt);
   });
 
   return {
