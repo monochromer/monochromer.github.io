@@ -5,6 +5,7 @@
   font-size: 0.8em;
   font-family: var(--font-mono);
   border-radius: 8px;
+  border-radius: clamp(0px, (100vw - 100% - var(--scroll-bar-size) * 1px), 8px);
   background-color: hsl(0 0% 100% / 0.12);
 
   &:focus-within {

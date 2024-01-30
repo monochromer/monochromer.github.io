@@ -2,7 +2,7 @@
   padding-inline: 0.15em;
   border: 1px solid color-mix(in srgb, currentColor, transparent 92%);
   overflow-wrap: break-word;
-  font-size: 0.85em;
+  font-size: 0.9em;
   line-height: 0;
   font-family: var(--font-mono);
   border-radius: clamp(2px, 4 / 16 * 1em, 8px);

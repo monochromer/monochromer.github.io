@@ -1,6 +1,22 @@
 import { clsx } from "clsx";
 import { ComponentType } from "preact";
+import { ShikiTransformer, addClassToHast } from "shiki";
 import { useEleventyContext } from "@/libs/eleventy-plugin-preact/context";
+
+const transformers: Array<ShikiTransformer> =[{
+  root(node) {
+    return {
+      type: 'root',
+      // @ts-ignore TODO: fix shiki types
+      children: node.children[0].children[0].children
+    }
+  },
+  line(node) {
+    node.properties = {
+      class: 'code-block__line'
+    };
+  },
+}];
 
 type CodeBlockProps = {
   className?: string;
@@ -13,21 +29,8 @@ export const CodeBlock: ComponentType<CodeBlockProps> = (props) => {
   const { language, codeText, className } = props;
 
   const highlightCode = functions.codeHighlight(codeText, language, {
-    elements: {
-      pre(props) {
-        return props.children;
-      },
-      code(props) {
-        return props.children;
-      },
-      line(props) {
-        return `<span class="code-block__line">${props.children}</span>`;
-      },
-      token(props) {
-        return `<span style="${props.style}">${props.children}</span>`;
-      }
-    }
-  })
+    transformers
+  });
 
   return (
     <pre className={clsx('code-block', className)} data-lang={language}>
