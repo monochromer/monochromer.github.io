@@ -182,7 +182,7 @@ module.exports = {
 
 ## Eleventy-плагин для работы с датами
 
-Все вышеперечисленные идеи я завернул в плагин [`@web-alchemy/eleventy-plugin-content-dates`](https://github.com/web-alchemy/eleventy-plugin-content-dates), добавив возможность использовать ключевые слова, подобные тем, что есть в Eleventy для `date`:
+Все вышеперечисленные идеи я завернул в [плагин](https://github.com/web-alchemy/eleventy-plugin-content-dates), добавив возможность использовать ключевые слова, подобные тем, что есть в Eleventy для `date`:
 
 - `Date. FS. Created`
 - `Date. FS. Last Modified`
@@ -218,3 +218,5 @@ module.exports = {
   updatedAtWithGit: TIMESTAMPS.GIT_LAST_MODIFIED,
 }
 ```
+
+Функции из плагина можно использовать как библиотеку без необходимости регистрировать плагин. Подробнее в [README](https://github.com/web-alchemy/eleventy-plugin-content-dates?tab=readme-ov-file#low-level-usage-example) репозитория.
