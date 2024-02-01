@@ -99,6 +99,7 @@
   position: relative;
   overflow-y: scroll;
   overscroll-behavior: none;
+  scroll-behavior: smooth;
   text-size-adjust: 100%;
   color: var(--color-dark);
   background-color: var(--color-light);
