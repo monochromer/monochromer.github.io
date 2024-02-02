@@ -3,9 +3,7 @@
   <channel>
     <atom:link href="{{ meta.siteBaseLink }}{{ permalink }}" rel="self" type="application/rss+xml" />
     <title>{{ meta.title }}</title>
-    {% if meta.description %}
-      <description>{{ meta.description }}</description>
-    {% endif %}
+    <description>{{ meta.description }}</description>
     <language>{{ meta.defaultLang }}</language>
     <link>{{ meta.siteBaseLink }}</link>
     {% if lastBuildDate %}
@@ -17,7 +15,7 @@
         <link>{{ article.link }}</link>
         <title>{{ article.title }}</title>
         <description><![CDATA[{{ article.content | safe }}]]></description>
-        <pubDate>{{ article.date }}</pubDate>
+        <pubDate>{{ article.publishedDate }}</pubDate>
       </item>
     {% endfor %}
   </channel>
