@@ -1,38 +1,4 @@
 .page {
-  --viewport-ratio: 0;
-}
-
-@media (min-width: calc((576 + (1440 - 576) * 0) * 1em / 16)) {
-  .page {
-    --viewport-ratio: 0;
-  }
-}
-
-@media (min-width: calc((576 + (1440 - 576) * 0.25) * 1em / 16)) {
-  .page {
-    --viewport-ratio: 0.25;
-  }
-}
-
-@media (min-width: calc((576 + (1440 - 576) * 0.5) * 1em / 16)) {
-  .page {
-    --viewport-ratio: 0.5;
-  }
-}
-
-@media (min-width: calc((576 + (1440 - 576) * 0.75) * 1em / 16)) {
-  .page {
-    --viewport-ratio: 0.75;
-  }
-}
-
-@media (min-width: calc((576 + (1440 - 576) * 1) * 1em / 16)) {
-  .page {
-    --viewport-ratio: 1;
-  }
-}
-
-.page {
   --max-container-size: 780;
   --min-viewport-width: 576;
   --max-viewport-width: 1440;
@@ -41,10 +7,32 @@
   --_min-viewport-width: calc(var(--min-viewport-width) * var(--_font-size-factor));
   --_max-viewport-width: calc(var(--max-viewport-width) * var(--_font-size-factor));
 
-  --viewport-width: calc((var(--_max-viewport-width) - var(--_min-viewport-width)) / 2); /* no js fallback */
-
   --_clamped-viewport-width: clamp(var(--_min-viewport-width), var(--viewport-width), var(--_max-viewport-width));
   --viewport-ratio: ((var(--_clamped-viewport-width) - var(--_min-viewport-width)) / (var(--_max-viewport-width) - var(--_min-viewport-width)));
+}
+
+.page__with-viewport-fallback {
+  --viewport-ratio: 0;
+
+  @media (min-width: calc((576 + (1440 - 576) * 0) * 1em / 16)) {
+    --viewport-ratio: 0;
+  }
+
+  @media (min-width: calc((576 + (1440 - 576) * 0.25) * 1em / 16)) {
+    --viewport-ratio: 0.25;
+  }
+
+  @media (min-width: calc((576 + (1440 - 576) * 0.5) * 1em / 16)) {
+    --viewport-ratio: 0.5;
+  }
+
+  @media (min-width: calc((576 + (1440 - 576) * 0.75) * 1em / 16)) {
+    --viewport-ratio: 0.75;
+  }
+
+  @media (min-width: calc((576 + (1440 - 576) * 1) * 1em / 16)) {
+    --viewport-ratio: 1;
+  }
 }
 
 .page {

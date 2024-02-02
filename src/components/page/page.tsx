@@ -12,7 +12,7 @@ interface PageProps {
 
 export const Page: ComponentType<PageProps> = (props) => {
   return (
-    <html className="page" lang="ru">
+    <html className="page page__with-viewport-fallback" lang="ru">
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

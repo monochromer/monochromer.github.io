@@ -6,15 +6,11 @@
     return style / 16;
   }
 
-  function calc() {
+  function setViewportValues() {
     html.style.setProperty('--viewport-width', window.innerWidth);
     html.style.setProperty('--viewport-height', window.innerHeight);
     html.style.setProperty('--font-size-factor', getFontSizeFactor());
   }
-
-  window.addEventListener('resize', calc);
-  window.screen?.orientation?.addEventListener('change', calc);
-  calc();
 
   function getScrollBarSize() {
     const element = document.createElement('div');
@@ -31,7 +27,17 @@
     return size;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    html.style.setProperty('--scroll-bar-size', getScrollBarSize());
-  })
+  function init() {
+    html.classList.remove('page__with-viewport-fallback');
+
+    window.addEventListener('resize', setViewportValues);
+    window.screen?.orientation?.addEventListener('change', setViewportValues);
+    setViewportValues();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      html.style.setProperty('--scroll-bar-size', getScrollBarSize());
+    });
+  }
+
+  init();
 }
