@@ -2,7 +2,7 @@ function formatDate(date) {
   return date.toUTCString();
 }
 
-module.exports = {
+export default {
   permalink: '/rss-feed.xml',
   articlesToDisplay: 10,
   eleventyComputed: {

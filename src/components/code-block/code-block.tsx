@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentType } from "preact";
 import { ShikiTransformer, addClassToHast } from "shiki";
-import { useEleventyContext } from "@/libs/eleventy-plugin-preact/context";
+import { useEleventyContext } from "#root/libs/eleventy-plugin-preact/context.tsx";
 
 const transformers: Array<ShikiTransformer> =[{
   root(node) {

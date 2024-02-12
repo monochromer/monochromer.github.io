@@ -1,7 +1,7 @@
-import { useEleventyContext } from "@/libs/eleventy-plugin-preact/context";
-import { ArticleList } from "@/components/article-list/article-list";
-import { ArticlePreview } from "@/components/article-preview/article-preview";
-import { IndexBlock } from "@/components/index-block/index-block";
+import { useEleventyContext } from "#root/libs/eleventy-plugin-preact/context.tsx";
+import { ArticleList } from "#root/components/article-list/article-list.tsx";
+import { ArticlePreview } from "#root/components/article-preview/article-preview.tsx";
+import { IndexBlock } from "#root/components/index-block/index-block.tsx";
 
 export const data = {
   layout: 'base',

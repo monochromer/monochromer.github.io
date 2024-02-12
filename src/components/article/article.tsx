@@ -1,7 +1,7 @@
 import { ComponentChild, ComponentType } from 'preact';
-import { dateToISO, formatDate, getDatesDiff } from '@/libs/dates';
-import { Title } from '@/components/title/title';
-import ArticleMeta from '@/components/article-meta/article-meta';
+import { dateToISO, formatDate, getDatesDiff } from '#root/libs/dates.ts';
+import { Title } from '#root/components/title/title.tsx';
+import ArticleMeta from '#root/components/article-meta/article-meta.tsx';
 
 type ArticleProps = {
   title: ComponentChild;

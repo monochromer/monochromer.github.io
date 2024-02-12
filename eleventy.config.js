@@ -1,12 +1,12 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const esbuild = require('esbuild');
-const eleventyPluginBundle = require('@11ty/eleventy-plugin-bundle');
-const eleventyPluginPreact = require('./src/libs/eleventy-plugin-preact');
+import fs from 'node:fs';
+import path from 'node:path';
+import esbuild from 'esbuild';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
+import eleventyPluginBundle from '@11ty/eleventy-plugin-bundle';
+import eleventyPluginPreact from './src/libs/eleventy-plugin-preact/.eleventy.js';
+import config from './config.js';
 
-const config = require('./config');
-
-module.exports = function(eleventyConfig) {
+export default async function(eleventyConfig) {
   eleventyConfig.addWatchTarget('./src/**/*.css');
   eleventyConfig.addWatchTarget('./src/**/*.client.js');
   eleventyConfig.addWatchTarget('./src/components/*.tsx');
@@ -25,7 +25,6 @@ module.exports = function(eleventyConfig) {
     bundles: [],
     transforms: [
       async function(content) {
-        const { default: browserslistToEsbuild } = await import('browserslist-to-esbuild');
         switch (this.type) {
           case 'css': {
             const result = await esbuild.build({

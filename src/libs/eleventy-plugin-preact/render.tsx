@@ -1,8 +1,8 @@
 import type { ComponentChildren, VNode } from 'preact';
 import { renderToString } from 'preact-render-to-string';
 
-import type { EleventyContextType, PageComponent, DataType  } from './types';
-import { EleventyContextProvider } from './context';
+import type { EleventyContextType, PageComponent, DataType  } from './types.ts';
+import { EleventyContextProvider } from './context.tsx';
 
 export function renderElement(
   Component: PageComponent<DataType>,

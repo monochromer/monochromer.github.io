@@ -1,6 +1,6 @@
 import type { ComponentType } from 'preact'
 import { clsx } from 'clsx';
-import { Link } from '@/components/link/link';
+import { Link } from '#root/components/link/link.tsx';
 
 interface FooterProps {
   buildYear: string;

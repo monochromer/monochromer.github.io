@@ -1,6 +1,6 @@
-import { Link } from "@/components/link/link";
-import { IndexBlock } from "@/components/index-block/index-block";
-import { UnorderedList } from '@/components/list/list'
+import { Link } from "#root/components/link/link.tsx";
+import { IndexBlock } from "#root/components/index-block/index-block.tsx";
+import { UnorderedList } from "#root/components/list/list.tsx";
 
 export const data = {
   title: 'О сайте',

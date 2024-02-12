@@ -1,6 +1,7 @@
-const { TIMESTAMPS, computeDate, getContentFolderPath } = require('@web-alchemy/eleventy-plugin-content-dates');
+import eleventyPluginContentDates from '@web-alchemy/eleventy-plugin-content-dates';
+const { TIMESTAMPS, computeDate, getContentFilePath } = eleventyPluginContentDates;
 
-module.exports = {
+export default {
   layout: 'article',
 
   eleventyComputed: {
@@ -36,7 +37,7 @@ module.exports = {
     updatedAt(data) {
       return computeDate({
         strategy: data.env.isDevelopmentMode ? TIMESTAMPS.FS_LAST_MODIFIED : TIMESTAMPS.GIT_LAST_MODIFIED,
-        contentPath: getContentFolderPath(data)
+        contentPath: getContentFilePath(data)
       })
     }
   }

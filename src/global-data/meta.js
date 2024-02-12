@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   buildYear: (new Date()).getFullYear(),
   title: 'Блог Monochromer',
   description: 'Блог о веб-разработке',

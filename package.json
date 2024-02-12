@@ -1,25 +1,29 @@
 {
   "name": "monochromer.github.io",
+  "type": "module",
   "scripts": {
     "start": "NODE_ENV=development eleventy --serve --watch",
     "start:incremental": "NODE_ENV=development eleventy --serve --watch --incremental",
     "build": "NODE_ENV=production eleventy"
   },
+  "imports": {
+    "#root/*": "./src/*"
+  },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy": "^3.0.0-alpha.4",
     "@11ty/eleventy-plugin-bundle": "^1.0.5",
+    "@types/node": "^20.11.19",
     "@web-alchemy/eleventy-plugin-content-dates": "^1.0.2",
     "browserslist-to-esbuild": "^2.1.1",
     "clsx": "^2.0.0",
-    "esbuild": "^0.19.10",
-    "esbuild-register": "^3.5.0",
+    "esbuild": "^0.20.0",
     "gray-matter": "^4.0.3",
     "html-escaper": "^3.0.3",
     "linkedom": "^0.16.5",
     "markdown-it": "^14.0.0",
     "preact": "^10.19.3",
     "preact-render-to-string": "^6.3.1",
-    "shiki": "^1.0.0-beta.0",
+    "shiki": "^1.1.2",
     "typescript": "^5.3.3"
   }
 }

@@ -1,5 +1,5 @@
 import { ComponentChild, ComponentType } from 'preact';
-import { Title } from '@/components/title/title';
+import { Title } from '#root/components/title/title.tsx';
 
 type IndexBlockProps = {
   title: ComponentChild;

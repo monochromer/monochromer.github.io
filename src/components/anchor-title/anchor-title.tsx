@@ -1,7 +1,7 @@
 import { ComponentType } from 'preact';
 import { clsx } from 'clsx';
-import { useEleventyContext } from '@/libs/eleventy-plugin-preact/context';
-import { VisuallyHidden } from '@/components/visually-hidden/visually-hidden';
+import { useEleventyContext } from '#root/libs/eleventy-plugin-preact/context.tsx';
+import { VisuallyHidden } from '#root/components/visually-hidden/visually-hidden.tsx';
 
 type AnchorTitleProps = {
   text: string;

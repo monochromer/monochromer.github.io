@@ -1,3 +1,7 @@
 {
-  "main": ".eleventy.js"
+  "main": ".eleventy.js",
+  "type": "module",
+  "exports": {
+    ".": "./.eleventy.js"
+  }
 }
