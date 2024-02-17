@@ -1,8 +1,8 @@
-import { useEleventyContext } from '@/libs/eleventy-plugin-preact/context';
-import { ArticlePreview } from '@/components/article-preview/article-preview';
-import { IndexBlock } from '@/components/index-block/index-block';
-import { ArticleList } from '@/components/article-list/article-list';
-import { Link } from '@/components/link/link';
+import { useEleventyContext } from '#root/libs/eleventy-plugin-preact/context.tsx';
+import { ArticlePreview } from '#root/components/article-preview/article-preview.tsx';
+import { IndexBlock } from '#root/components/index-block/index-block.tsx';
+import { ArticleList } from '#root/components/article-list/article-list.tsx';
+import { Link } from '#root/components/link/link.tsx';
 
 export const data = {
   permalink: '/',

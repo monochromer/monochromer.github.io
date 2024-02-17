@@ -3,7 +3,7 @@ const ENVS = {
   DEVELOPMENT: 'development'
 }
 
-module.exports = Object.freeze({
+export default Object.freeze({
   isProductionMode: process.env.NODE_ENV === ENVS.PRODUCTION,
 
   get isDevelopmentMode() {

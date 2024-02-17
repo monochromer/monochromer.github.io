@@ -1,5 +1,5 @@
-import { useEleventyContext } from '@/libs/eleventy-plugin-preact/context';
-import Article from '@/components/article/article';
+import { useEleventyContext } from '#root/libs/eleventy-plugin-preact/context.tsx';
+import Article from '#root/components/article/article.tsx';
 
 export const data = {
   layout: 'base'

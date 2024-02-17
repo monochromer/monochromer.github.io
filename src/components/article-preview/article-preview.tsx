@@ -1,7 +1,7 @@
 import type { ComponentType, VNode } from 'preact';
-import { dateToISO, formatDate } from '@/libs/dates';
-import Title from '@/components/title/title';
-import { Link } from '@/components/link/link';
+import { dateToISO, formatDate } from '#root/libs/dates.ts';
+import Title from '#root/components/title/title.tsx';
+import { Link } from '#root/components/link/link.tsx';
 
 type ArticlePreviewProps = {
   url: string;

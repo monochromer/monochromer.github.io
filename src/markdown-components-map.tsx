@@ -1,13 +1,13 @@
 import { clsx } from 'clsx';
 import { unescape } from 'html-escaper';
-import { Title } from '@/components/title/title';
-import { Paragraph } from '@/components/paragraph/paragraph';
-import { CodeBlock } from '@/components/code-block/code-block';
-import { Link } from '@/components/link/link';
-import { InlineCode } from '@/components/inline-code/inline-code';
-import { AnchorTitle } from '@/components/anchor-title/anchor-title';
-import { Divider } from '@/components/divider/divider';
-import { OrderedList, UnorderedList, ListItem } from '@/components/list/list';
+import { Title } from '#root/components/title/title.tsx';
+import { Paragraph } from '#root/components/paragraph/paragraph.tsx';
+import { CodeBlock } from '#root/components/code-block/code-block.tsx';
+import { Link } from '#root/components/link/link.tsx';
+import { InlineCode } from '#root/components/inline-code/inline-code.tsx';
+import { AnchorTitle } from '#root/components/anchor-title/anchor-title.tsx';
+import { Divider } from '#root/components/divider/divider.tsx';
+import { OrderedList, UnorderedList, ListItem } from '#root/components/list/list.tsx';
 
 function createTitleComponent(level) {
   return (props) => {

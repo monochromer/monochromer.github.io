@@ -1,11 +1,13 @@
-const path = require('node:path');
-const fs = require('node:fs');
-const { parseHTML } = require('linkedom');
-const frontMatter = require('gray-matter');
-const markdownIt = require('markdown-it');
-const { renderPage } = require('./render.tsx');
-const { EleventyContextProvider } = require('./context.tsx');
-const { defaultComponents, FallbackComponent } = require('./makrdown-content.tsx');
+import path from 'node:path';
+import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { parseHTML } from 'linkedom';
+import frontMatter from 'gray-matter';
+import markdownIt from 'markdown-it';
+import { getHighlighter, bundledLanguages } from 'shiki';
+import { renderPage } from './render.tsx';
+import { EleventyContextProvider } from './context.tsx';
+import { defaultComponents, FallbackComponent } from './makrdown-content.tsx';
 
 function prepareEleventyContext(eleventyConfig, data) {
   const functions = {};
@@ -28,7 +30,7 @@ function prepareEleventyContext(eleventyConfig, data) {
   return eleventyContext;
 }
 
-module.exports = function(eleventyConfig, pluginOptions = {}) {
+export default async function(eleventyConfig, pluginOptions = {}) {
   /** @type {import('shiki').Highlighter} */
   let codeHightlighter;
 
@@ -77,9 +79,9 @@ module.exports = function(eleventyConfig, pluginOptions = {}) {
     }
   ]
 
-  const userComponents = (() => {
+  const userComponents = await (async () => {
     try {
-      return require(pluginOptions?.componentsPath).default;
+      return (await import(pluginOptions?.componentsPath)).default;
     } catch {
       return null;
     }
@@ -122,12 +124,11 @@ module.exports = function(eleventyConfig, pluginOptions = {}) {
     },
 
     async init() {
-      const shiki = await import('shiki');
-      const themeSchemeFilePath = path.join(__dirname, 'code-themes', 'gruvbox-light-soft.json');
+      const themeSchemeFilePath = new URL('./code-themes/gruvbox-light-soft.json', import.meta.url);
       const themeScheme = JSON.parse(fs.readFileSync(themeSchemeFilePath, 'utf-8'));
-      codeHightlighter = await shiki.getHighlighter({
+      codeHightlighter = await getHighlighter({
         themes: [themeScheme],
-        langs: Object.keys(shiki.bundledLanguages),
+        langs: Object.keys(bundledLanguages),
         langAlias: {
           'njk': 'liquid',
           'nunjucks': 'liquid',
@@ -212,7 +213,8 @@ module.exports = function(eleventyConfig, pluginOptions = {}) {
     },
 
     async getData(inputPath) {
-      const module = require(path.join(process.cwd(), inputPath));
+      const moduleUrl = pathToFileURL(path.join(process.cwd(), inputPath))
+      const module = await import(moduleUrl);
       const data = module.frontmatter ?? module.data;
       const resultData = typeof data === 'function' ? await data() : data;
       return resultData;
@@ -226,7 +228,7 @@ module.exports = function(eleventyConfig, pluginOptions = {}) {
         return;
       }
 
-      const { default: Component } = require(path.join(process.cwd(), inputPath));
+      const { default: Component } = await import(pathToFileURL(path.join(process.cwd(), inputPath)));
 
       return async function renderTemplate(data) {
         const ChildComponent = data.layoutContent;

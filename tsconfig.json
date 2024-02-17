@@ -2,7 +2,7 @@
   "extends": "./src/libs/eleventy-plugin-preact/tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "#root/*": ["./src/*"]
     }
   }
 }

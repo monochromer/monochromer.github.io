@@ -1,9 +1,9 @@
-import { useEleventyContext } from '@/libs/eleventy-plugin-preact/context';
-import { Page } from '@/components/page/page';
-import { Logo } from '@/components/logo/logo';
-import { Footer } from '@/components/footer/footer';
-import { Header } from '@/components/header/header';
-import { MainNav } from '@/components/main-nav/main-nav';
+import { useEleventyContext } from '#root/libs/eleventy-plugin-preact/context.tsx';
+import { Page } from '#root/components/page/page.tsx';
+import { Logo } from '#root/components/logo/logo.tsx';
+import { Footer } from '#root/components/footer/footer.tsx';
+import { Header } from '#root/components/header/header.tsx';
+import { MainNav } from '#root/components/main-nav/main-nav.tsx';
 
 export const BaseLayout = () => {
   const { data, functions } = useEleventyContext();
