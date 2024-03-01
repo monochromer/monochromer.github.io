@@ -1,5 +1,6 @@
 export const defaultComponents = {
-  '#text': (props) => props.node.textContent
+  '#text': (props) => props.node.textContent,
+  '#comment': () => null
 }
 
 function attrsToObject(attrs) {
