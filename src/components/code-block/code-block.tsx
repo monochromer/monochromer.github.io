@@ -28,13 +28,13 @@ export const CodeBlock: ComponentType<CodeBlockProps> = (props) => {
   const { functions } = useEleventyContext();
   const { language, codeText, className } = props;
 
-  const highlightCode = functions.codeHighlight(codeText, language, {
+  const code = language ? functions.codeHighlight(codeText, language, {
     transformers
-  });
+  }) : codeText;
 
   return (
     <pre className={clsx('code-block', className)} data-lang={language}>
-      <code className={'code-block__content'} dangerouslySetInnerHTML={{ __html: highlightCode }} tabIndex={0} />
+      <code className={'code-block__content'} dangerouslySetInnerHTML={{ __html: code }} tabIndex={0} />
     </pre>
   )
 }

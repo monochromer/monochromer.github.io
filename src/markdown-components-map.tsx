@@ -47,13 +47,16 @@ export default {
   'code': InlineCode,
   'pre': (props) => {
     const { node } = props;
-    const isCodeBlock = node.hasAttribute('data-lang');
     const lang = node.getAttribute('data-lang');
     const code = unescape(node.firstChild.textContent);
 
-    return isCodeBlock
-      ? <CodeBlock className={clsx('article__code-block', props.className)} language={lang} codeText={code}/>
-      : null
+    return (
+      <CodeBlock
+        className={clsx('article__code-block', props.className)}
+        language={lang}
+        codeText={code}
+      />
+    )
   },
   'hr': Divider,
   'li': ListItem,
