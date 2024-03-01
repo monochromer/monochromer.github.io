@@ -1,5 +1,6 @@
 .list {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(8px, 8 / 20 * 1em, 16px);
 }
 
