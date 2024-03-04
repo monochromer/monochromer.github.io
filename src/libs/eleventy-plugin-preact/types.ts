@@ -1,4 +1,4 @@
-import type { ComponentType, JSX, HTMLAttributes } from 'preact'
+import type { ComponentType, JSX } from 'preact'
 
 export type DataType = {
   [key: string]: any
@@ -21,12 +21,4 @@ type ElementsType = keyof JSX.IntrinsicElements
 
 export type HtmlElementstoComponentsMap = {
   [key in ElementsType]: ComponentType<JSX.IntrinsicElements[key]>
-}
-
-let map: HtmlElementstoComponentsMap = {
-  // text: () => null,
-  table: (props) => {
-    props['aria-flowto']
-    return null
-  }
 }

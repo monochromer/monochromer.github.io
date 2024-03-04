@@ -2,7 +2,7 @@ import type { FunctionComponent, Consumer } from 'preact';
 import { createContext} from 'preact';
 import { useContext } from 'preact/hooks';
 
-import type { EleventyContextType } from './types';
+import type { EleventyContextType } from './types.ts';
 
 const EleventyContext = createContext<EleventyContextType>(null);
 
