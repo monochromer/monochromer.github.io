@@ -1,6 +1,6 @@
 import esbuild from 'esbuild';
 
-const extRegExp =  /\.(jsx|ts|tsx|mts|cts)$/;
+const extRegExp =  /\.(jsx|ts|tsx|mts)$/;
 
 export async function load(url, context, nextLoad) {
   if (!extRegExp.test(url)) {
