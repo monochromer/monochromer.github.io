@@ -1,10 +1,6 @@
 .article-preview {
   --_article-preview-gap: clamp(16px, 10 / 960 * 100%, 32px);
   position: relative;
-
-  &:hover {
-    color: var(--color-fade);
-  }
 }
 
 .article-preview__title {
