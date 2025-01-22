@@ -4,14 +4,25 @@ import { pathToFileURL } from 'node:url';
 import { parseHTML } from 'linkedom';
 import frontMatter from 'gray-matter';
 import markdownIt from 'markdown-it';
-import { getHighlighter, bundledLanguages } from 'shiki';
-import { renderPage } from './render.tsx';
+import { createHighlighter, bundledLanguages } from 'shiki';
+import { renderToString, wrapComponentIntoContext } from './render.tsx';
 import { EleventyContextProvider } from './context.tsx';
-import { defaultComponents, FallbackComponent } from './makrdown-content.tsx';
+import { MarkdownContent } from './makrdown-content.tsx';
+
+const ROOT_LAYOUT = '__root-jsx-layout__.11ty.js';
 
 function prepareEleventyContext(eleventyConfig, data) {
   const functions = {};
-  for (const [funcName, func] of Object.entries(eleventyConfig.javascriptFunctions)) {
+  const eleventyFunctions = {
+    ...eleventyConfig.universal.filters,
+    ...eleventyConfig.universal.shortcodes,
+    ...eleventyConfig.universal.pairedShortcodes,
+    ...eleventyConfig.javascript.filters,
+    ...eleventyConfig.javascript.shortcodes,
+    ...eleventyConfig.javascript.pairedShortcodes,
+    ...eleventyConfig.javascript.functions,
+  }
+  for (const [funcName, func] of Object.entries(eleventyFunctions)) {
     functions[funcName] = func.bind(functions);
   };
   for (const key of ['page', 'eleventy']) {
@@ -79,38 +90,6 @@ export default async function(eleventyConfig, pluginOptions = {}) {
     }
   ]
 
-  const userComponents = await (async () => {
-    try {
-      return (await import(pluginOptions?.componentsPath)).default;
-    } catch {
-      return null;
-    }
-  })()
-
-  function getComponent(key) {
-    return userComponents?.[key] ?? defaultComponents?.[key] ?? FallbackComponent;
-  }
-
-  function createComponentFromNode(node) {
-    const key = node.nodeName.toLowerCase();
-    const Component = getComponent(key);
-    const children = renderNodes(node.childNodes);
-    return (props) => {
-      return (
-        <Component node={node} {...props}>
-          {children}
-        </Component>
-      )
-    }
-  }
-
-  function renderNodes(childNodes) {
-    return [...childNodes].map((node) => {
-      const Component = createComponentFromNode(node);
-      return <Component />;
-    })
-  }
-
   eleventyConfig.addExtension('md', {
     read: true,
 
@@ -126,7 +105,7 @@ export default async function(eleventyConfig, pluginOptions = {}) {
     async init() {
       const themeSchemeFilePath = new URL('./code-themes/gruvbox-light-soft.json', import.meta.url);
       const themeScheme = JSON.parse(fs.readFileSync(themeSchemeFilePath, 'utf-8'));
-      codeHightlighter = await getHighlighter({
+      codeHightlighter = await createHighlighter({
         themes: [themeScheme],
         langs: Object.keys(bundledLanguages),
         langAlias: {
@@ -165,18 +144,22 @@ export default async function(eleventyConfig, pluginOptions = {}) {
       return async function(data) {
         const eleventyContext = prepareEleventyContext(eleventyConfig, data);
 
-        const MarkdownContentComponent = () => {
-          return (
-            <EleventyContextProvider value={eleventyContext}>
-              {data.children ? renderNodes(data.children) : null}
-            </EleventyContextProvider>
-          )
+        const createMarkdownComponent = (nodes) => {
+          return (props) => {
+            return (
+              <EleventyContextProvider value={eleventyContext}>
+                <MarkdownContent nodes={nodes} components={props.components} />
+              </EleventyContextProvider>
+            )
+          }
         }
 
+        const MarkdownContentComponent = createMarkdownComponent(data.children);
+
         Object.assign(MarkdownContentComponent, {
-          Title: data.titleElement ? createComponentFromNode(data.titleElement) : null,
-          TitleContent: data.titleElement ? () => renderNodes(data.titleElement.childNodes) : null,
-          Excerpt: data.excerptElements ? () => renderNodes(data.excerptElements) : null,
+          Title: data.titleElement ? createMarkdownComponent(data.titleElement) : null,
+          TitleContent: data.titleElement ? createMarkdownComponent(data.titleElement.childNodes) : null,
+          Excerpt: data.excerptElements ? createMarkdownComponent(data.excerptElements) : null,
           Body: MarkdownContentComponent
         });
 
@@ -217,7 +200,7 @@ export default async function(eleventyConfig, pluginOptions = {}) {
       const module = await import(moduleUrl);
       const data = module.frontmatter ?? module.data;
       const resultData = typeof data === 'function' ? await data() : data;
-      return resultData;
+      return Object.assign({ layout: ROOT_LAYOUT }, resultData);
     },
 
     async compile(inputContent, inputPath) {
@@ -228,7 +211,8 @@ export default async function(eleventyConfig, pluginOptions = {}) {
         return;
       }
 
-      const { default: Component } = await import(pathToFileURL(path.join(process.cwd(), inputPath)));
+      const moduleUrl = pathToFileURL(path.join(process.cwd(), inputPath));
+      const { default: Component } = await import(moduleUrl);
 
       return async function renderTemplate(data) {
         const ChildComponent = data.layoutContent;
@@ -247,13 +231,12 @@ export default async function(eleventyConfig, pluginOptions = {}) {
     }
   });
 
-  eleventyConfig.addTransform('eleventy-plugin-preact-transform', function(content) {
-    if (!templateFormats.concat('md').includes(this.page.templateSyntax)) {
-      return content;
+  eleventyConfig.addTemplate(path.join(eleventyConfig.dir.layouts ?? eleventyConfig.dir.includes, ROOT_LAYOUT), {
+    async render(data) {
+      const eleventyContext = prepareEleventyContext(eleventyConfig, data);
+      const element = wrapComponentIntoContext(data.content, eleventyContext);
+      const content = await renderToString(element);
+      return '<!DOCTYPE html>' + content;
     }
-
-    const Component = content;
-    const rawHtml = renderPage(<Component />);
-    return rawHtml;
   });
 }

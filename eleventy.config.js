@@ -1,9 +1,7 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import esbuild from 'esbuild';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
-import eleventyPluginBundle from '@11ty/eleventy-plugin-bundle';
-import eleventyPluginPreact from './src/libs/eleventy-plugin-preact/.eleventy.js';
+import eleventyPluginPreact from '#root/libs/eleventy-plugin-preact/.eleventy.js';
 import config from './config.js';
 
 export default async function(eleventyConfig) {
@@ -16,72 +14,52 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyPluginPreact, {
     templateFormats: ['11ty.jsx', '11ty.tsx'],
-    componentsPath: path.join(process.cwd(), './src/markdown-components-map.tsx')
   });
 
-  /* add bundle after our plugin for correct html transform */
-  eleventyConfig.addPlugin(eleventyPluginBundle, {
-    toFileDirectory: 'bundle',
-    bundles: [],
+  eleventyConfig.addBundle('css', {
     transforms: [
       async function(content) {
-        switch (this.type) {
-          case 'css': {
-            const result = await esbuild.build({
-              stdin: {
-                contents: content,
-                resolveDir: eleventyConfig.dir.input,
-                sourcefile: this.page.inputPath,
-                loader: 'css',
-              },
-              external: ['*.png', '*.jpg', '*.jpeg', '*.svg', '*.webp', '*.woff2'],
-              outdir: eleventyConfig.dir.output + '/assets',
-              bundle: true,
-              minify: config.isProductionMode,
-              write: false,
-              target: browserslistToEsbuild()
-            })
-            return result.outputFiles[0].text;
-          }
-          case 'js': {
-            const result = await esbuild.build({
-              stdin: {
-                contents: content,
-                resolveDir: eleventyConfig.dir.input,
-                sourcefile: this.page.inputPath,
-                loader: 'js',
-              },
-              bundle: true,
-              minify: config.isProductionMode,
-              write: false,
-              target: browserslistToEsbuild()
-            })
-            return result.outputFiles[0].text;
-          }
-          default: return content;
-        }
+        const result = await esbuild.build({
+          stdin: {
+            contents: content,
+            resolveDir: eleventyConfig.dir.input,
+            sourcefile: this.page.inputPath,
+            loader: 'css',
+          },
+          external: ['*.png', '*.jpg', '*.jpeg', '*.svg', '*.webp', '*.woff2'],
+          outdir: eleventyConfig.dir.output + '/assets',
+          bundle: true,
+          minify: config.isProductionMode,
+          write: false,
+          target: browserslistToEsbuild()
+        });
+        return result.outputFiles[0].text;
       }
-    ],
-    hoistDuplicateBundlesFor: []
+    ]
   });
 
-  eleventyConfig.addJavaScriptFunction('getFileContent', function(filePath) {
-    const fileContent = fs.readFileSync(filePath, {
-      encoding: 'utf-8'
-    });
-    return fileContent;
+  eleventyConfig.addBundle('js', {
+    transforms: [
+      async function(content) {
+        const result = await esbuild.build({
+          stdin: {
+            contents: content,
+            resolveDir: eleventyConfig.dir.input,
+            sourcefile: this.page.inputPath,
+            loader: 'js',
+          },
+          bundle: true,
+          minify: config.isProductionMode,
+          write: false,
+          target: browserslistToEsbuild()
+        });
+        return result.outputFiles[0].text;
+      }
+    ]
   });
 
-  eleventyConfig.addJavaScriptFunction('getMainStylesContent', function() {
-    const fileContent = this.getFileContent('src/entries/main.css');
-    this.css(fileContent);
-    return this.getBundle('css');
-  });
-
-  eleventyConfig.addJavaScriptFunction('getCriticalJSContent', function() {
-    const fileContent = this.getFileContent('src/components/page/page.client.js');
-    this.js(fileContent, 'critical-js');
-    return this.getBundle('js', 'critical-js');
+  eleventyConfig.addFilter('include', (filePath) => {
+    return fs.readFileSync(filePath, 'utf-8');
   });
 
   eleventyConfig.addPassthroughCopy({ [`${config.folders.src}/assets/icons/`]: '/' });

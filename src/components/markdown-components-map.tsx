@@ -28,24 +28,24 @@ function createTitleComponent(level) {
 }
 
 export default {
-  'h1': createTitleComponent(1),
-  'h2': createTitleComponent(2),
-  'h3': createTitleComponent(3),
-  'h4': createTitleComponent(4),
-  'h5': createTitleComponent(5),
-  'h6': createTitleComponent(6),
-  'p': Paragraph,
-  'a': (props) => {
+  'H1': createTitleComponent(1),
+  'H2': createTitleComponent(2),
+  'H3': createTitleComponent(3),
+  'H4': createTitleComponent(4),
+  'H5': createTitleComponent(5),
+  'H6': createTitleComponent(6),
+  'P': Paragraph,
+  'A': (props) => {
     const { node } = props;
-    const isExternal = node.href.startsWith('//') || node.href.startsWith('http://') || node.href.startsWith('https://');
+    const isExternal = ['//', 'http://', 'https://'].some((v) => node.href.startsWith(v));
     return (
       <Link className={clsx(props.className, props.node.className)} href={node.href} isExternal={isExternal}>
         {props.children}
       </Link>
     )
   },
-  'code': InlineCode,
-  'pre': (props) => {
+  'CODE': InlineCode,
+  'PRE': (props) => {
     const { node } = props;
     const lang = node.getAttribute('data-lang');
     const code = unescape(node.firstChild.textContent);
@@ -58,8 +58,8 @@ export default {
       />
     )
   },
-  'hr': Divider,
-  'li': ListItem,
-  'ul': UnorderedList,
-  'ol': OrderedList,
+  'HR': Divider,
+  'LI': ListItem,
+  'UL': UnorderedList,
+  'OL': OrderedList,
 }

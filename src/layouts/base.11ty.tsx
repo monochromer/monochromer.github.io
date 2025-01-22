@@ -9,6 +9,9 @@ export const BaseLayout = () => {
   const { data, functions } = useEleventyContext();
   const Content = data.content;
 
+  functions.css(functions.include('src/entries/main.css'));
+  functions.js(functions.include('src/components/page/page.client.js'), 'critical-js');
+
   return (
     <Page
       title={data.title}
@@ -24,8 +27,8 @@ export const BaseLayout = () => {
           <link rel="icon" href="/icon.svg" type="image/svg+xml" />
           <link rel="icon" href="/favicon.ico" sizes="32x32" />
           <link rel="alternate" href="/rss-feed.xml" type="application/rss+xml" title="Блог Monochromer"></link>
-          <script>{functions.getCriticalJSContent()}</script>
-          <style>{functions.getMainStylesContent()}</style>
+          <style>{functions.getBundle('css')}</style>
+          <script>{functions.getBundle('js', 'critical-js')}</script>
         </>
       }
     >

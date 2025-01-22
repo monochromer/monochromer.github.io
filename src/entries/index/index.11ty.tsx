@@ -1,8 +1,7 @@
 import { useEleventyContext } from '#root/libs/eleventy-plugin-preact/context.tsx';
-import { ArticlePreview } from '#root/components/article-preview/article-preview.tsx';
 import { IndexBlock } from '#root/components/index-block/index-block.tsx';
-import { ArticleList } from '#root/components/article-list/article-list.tsx';
 import { Link } from '#root/components/link/link.tsx';
+import { ArticlePreviewList } from '#root/components/article-preview-list/article-preview-list.tsx';
 
 export const data = {
   permalink: '/',
@@ -41,21 +40,7 @@ export const data = {
           : null
       }
     >
-      <ArticleList>
-        {data.articlesToShow.map((article) => {
-          const Content = article.content;
-          return (
-            <ArticleList.Item>
-              <ArticlePreview
-                url={article.data.page.url}
-                title={<Content.TitleContent />}
-                excerpt={article.data.excerptElements?.length > 0 ? <Content.Excerpt /> : article.data.description}
-                publishedAt={article.data.publishedAt}
-              />
-            </ArticleList.Item>
-          )
-        })}
-      </ArticleList>
+      <ArticlePreviewList items={data.articlesToShow} />
     </IndexBlock>
   )
 }

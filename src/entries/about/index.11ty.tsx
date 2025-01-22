@@ -1,6 +1,7 @@
 import { Link } from "#root/components/link/link.tsx";
 import { IndexBlock } from "#root/components/index-block/index-block.tsx";
 import { UnorderedList } from "#root/components/list/list.tsx";
+import { useEleventyContext } from '#root/libs/eleventy-plugin-preact/context.tsx';
 
 export const data = {
   title: 'О сайте',
