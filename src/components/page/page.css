@@ -92,17 +92,6 @@
   color: var(--color-dark);
   background-color: var(--color-light);
 
-  &::after {
-    --_tile-size: 64px;
-    content: "";
-    opacity: 0.008;
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/noise.png');
-    background-size: calc(var(--_tile-size) * 2);
-    pointer-events: none;
-  }
-
   @supports (scrollbar-gutter: stable) {
     overflow-y: auto;
     scrollbar-gutter: stable;
@@ -126,6 +115,17 @@
     ". main   ."
     ". footer .";
   font-family: var(--font-main, sans-serif);
+
+  &::after {
+    --_tile-size: 64px;
+    content: "";
+    opacity: 0.008;
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/noise.png');
+    background-size: calc(var(--_tile-size) * 2);
+    pointer-events: none;
+  }
 }
 
 .page__header {
