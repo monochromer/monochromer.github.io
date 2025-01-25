@@ -1,65 +1,91 @@
 import { type ComponentChildren, type AnyComponent } from 'preact';
-import { Node } from 'linkedom';
+import { Node as LinkeDOMNode } from 'linkedom';
+
+export type PropsType<NodeType extends Node> = {
+  node: NodeType;
+  children?: ComponentChildren;
+}
+
+export type BaseComponent<NodeType extends Node = Node> = AnyComponent<PropsType<NodeType>>;
+
+export type BaseElementComponent<ElementType extends Element = Element> = BaseComponent<ElementType>;
+
+export type BaseHTMLElementComponent<ElementType extends HTMLElement = HTMLElement> = BaseComponent<ElementType>;
+
+export type BaseSVGElementComponent<ElementType extends SVGElement = SVGElement> = BaseComponent<ElementType>;
+
+export type BaseMathMLElementComponent<ElementType extends MathMLElement = MathMLElement> = BaseComponent<ElementType>;
+
+export type HTMLElementRecord = Record<string, HTMLElement>;
+
+type SpecialComponentsMap = Partial<{
+  html: BaseComponent<DocumentType>;
+ '#text': BaseComponent<Text>;
+ '#comment': BaseComponent<Comment>;
+}>
+
+type HTMLElementComponentsMap = {
+ [TagName in Uppercase<keyof HTMLElementTagNameMap>]?: BaseHTMLElementComponent<HTMLElementTagNameMap[Lowercase<TagName>]>;
+}
+
+type SVGElementComponentsMap = {
+ [TagName in keyof SVGElementTagNameMap]?: BaseSVGElementComponent<SVGElementTagNameMap[TagName]>;
+}
+
+type MathMLElementComponentsMap = {
+ [TagName in keyof MathMLElementTagNameMap]?: BaseMathMLElementComponent<MathMLElementTagNameMap[TagName]>;
+}
+
+type CustomElementsComponentsMap<CustomElementsTagNameMap extends HTMLElementRecord> = {
+ [TagName in keyof CustomElementsTagNameMap]?: BaseHTMLElementComponent<CustomElementsTagNameMap[TagName]>
+};
+
+export type ComponentsMap<CustomElementsTagNameMap extends HTMLElementRecord = {}> =
+ & SpecialComponentsMap
+ & HTMLElementComponentsMap
+ & SVGElementComponentsMap
+ & MathMLElementComponentsMap
+ & CustomElementsComponentsMap<CustomElementsTagNameMap>
+;
 
 type MarkdownComponent = AnyComponent<{
   node: Node;
   children?: ComponentChildren;
 }>;
 
-// TODO: refactor or continue list
-type ComponentKey =
-  | '#text'
-  | '#comment'
-  | 'html'
-  | 'SPAN'
-  | 'DIV'
-  | 'HTML'
-  | 'HEAD'
-  | 'TITLE'
-  | 'META'
-  | 'LINK'
-  | 'STYLE'
-  | 'SCRIPT'
-  | 'NOSCRIPT'
-  | 'BODY'
-  | 'HEADER'
-  | 'FOOTER'
-  | 'MAIN'
-  | 'H1'
-  | 'H2'
-  | 'H3'
-  | 'H4'
-  | 'H5'
-  | 'H6'
-  | 'P'
-  | 'A'
-  | 'B'
-  | 'CODE'
-  | 'PRE'
-  | 'IMG'
-  | 'PICTURE'
-  | 'UL'
-  | 'OL'
-  | string
-;
+/*
+// example with custom elements:
+class CustomImage extends HTMLImageElement {}
+class SomeCustomElement extends HTMLElement {}
 
-type ComponentsMap = Record<ComponentKey, MarkdownComponent>;
+type CustomElementsTagNameMap = {
+  'C-IMAGE': CustomImage;
+  'TURBO-FRAME': SomeCustomElement;
+};
 
-const defaultComponents: Partial<ComponentsMap> = {
+const componentsMap: ComponentsMap<CustomElementsTagNameMap> = {
+  H1: (props) => `<h1 class="title">${props.node.textContent}</h1>`,
+  IMG: (props) => `<picture><img src="${props.node.src}"></picture>`,
+  'C-IMAGE': (props) => props.node.src,
+  'TURBO-FRAME': () => null,
+};
+*/
+
+const defaultComponents: Partial<SpecialComponentsMap> = {
   '#text': (props) => <>{props.node.textContent}</>,
   '#comment': () => null,
 }
 
 function attrsToObject(attrs: NamedNodeMap) {
-  return Object.fromEntries([...attrs].map((attr) => [attr.name, attr.value]))
+  return Object.fromEntries([...attrs].map((attr) => [attr.name, attr.value]));
 }
 
-const FallbackComponent: MarkdownComponent = (props) => {
+const FallbackComponent: BaseComponent = (props) => {
   const { node, children } = props;
 
   switch (true) {
     // @ts-ignore
-    case (node.nodeType === Node.ELEMENT_NODE): {
+    case (node.nodeType === LinkeDOMNode.ELEMENT_NODE): {
       const Tag = node.nodeName.toLowerCase() as any;
       const passProps = attrsToObject((node as Element).attributes);
       return (
@@ -76,7 +102,7 @@ const FallbackComponent: MarkdownComponent = (props) => {
 
 type MarkdownContentProps = {
   nodes: NodeList;
-  components?: ComponentsMap
+  components?: ComponentsMap;
 }
 
 export const MarkdownContent = (props: MarkdownContentProps) => {
