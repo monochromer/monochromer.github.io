@@ -8,6 +8,7 @@
   border-radius: 8px;
   border-radius: clamp(0px, (100vw - 100% - var(--scroll-bar-size) * 1px), 8px);
   background-color: hsl(0 0% 100% / 0.12);
+  user-select: all;
 
   &:focus-within {
     border-color: var(--color-accent);
