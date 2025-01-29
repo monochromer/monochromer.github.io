@@ -11,7 +11,7 @@
     {
       "scope": "emphasis",
       "settings": {
-        "fontStyle": "italic"
+
       }
     },
     {
@@ -29,8 +29,8 @@
     {
       "scope": ["comment", "punctuation.definition.comment"],
       "settings": {
-        "foreground": "#928374",
-        "fontStyle": "italic"
+        "foreground": "#928374"
+
       }
     },
     {
@@ -575,7 +575,7 @@
     {
       "scope": "markup.italic",
       "settings": {
-        "fontStyle": "italic"
+
       }
     },
     {
