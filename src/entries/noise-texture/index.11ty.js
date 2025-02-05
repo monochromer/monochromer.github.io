@@ -6,6 +6,7 @@ export default {
     tileSize: 64
   },
 
+  // Нужно использовать `async`. https://github.com/11ty/eleventy/issues/3629
   async render(data) {
     const tileSize = data.tileSize ?? 64;
     const black = new Uint8ClampedArray([0, 0, 0, 255]);
