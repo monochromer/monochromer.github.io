@@ -1,7 +1,7 @@
 .code-block {
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid color-mix(in srgb, currentColor, transparent 92%);
+  border: 1px solid color-mix(in srgb, currentColor 8%, transparent);
   font-size: 0.8em;
   line-height: 1.6;
   font-family: var(--font-mono);
@@ -12,7 +12,7 @@
 
   &:focus-within {
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px color-mix(in hsl, var(--color-accent), transparent 88%);
+    box-shadow: 0 0 0 3px color-mix(in hsl, var(--color-accent) 12%, transparent);
   }
 }
 

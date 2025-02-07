@@ -9,8 +9,8 @@
   --_link-stroke-color:
     color-mix(
       in hsl,
-      currentColor,
-      transparent calc(100% * (1 - var(--_link-stroke-opacity)) + 60% * var(--_link-stroke-opacity))
+      currentColor calc(40% * var(--_link-stroke-opacity)),
+      transparent
     );
   text-decoration-color: var(--_link-stroke-color);
   text-decoration-thickness: 2px;

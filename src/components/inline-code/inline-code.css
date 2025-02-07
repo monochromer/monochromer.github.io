@@ -1,6 +1,6 @@
 .inline-code {
   padding-inline: 0.15em;
-  border: 1px solid color-mix(in srgb, currentColor, transparent 92%);
+  border: 1px solid color-mix(in srgb, currentColor 8%, transparent);
   overflow-wrap: break-word;
   font-size: 0.9em;
   line-height: 0;
