@@ -28,7 +28,7 @@
   }
 
   function init() {
-    html.classList.remove('page__with-viewport-fallback');
+    html.classList.remove('page_with-viewport-fallback');
 
     window.addEventListener('resize', setViewportValues);
     window.screen?.orientation?.addEventListener('change', setViewportValues);

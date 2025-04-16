@@ -11,7 +11,7 @@
   --viewport-ratio: ((var(--_clamped-viewport-width) - var(--_min-viewport-width)) / (var(--_max-viewport-width) - var(--_min-viewport-width)));
 }
 
-.page__with-viewport-fallback {
+.page_with-viewport-fallback {
   --viewport-ratio: 0;
 
   @media (min-width: calc((576 + (1440 - 576) * 0) * 1em / 16)) {
