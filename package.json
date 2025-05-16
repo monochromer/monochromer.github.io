@@ -13,20 +13,20 @@
     "#root/*": "./src/*"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy": "^3.1.0",
     "@napi-rs/canvas": "^0.1.65",
     "@types/node": "^22.5.5",
     "@web-alchemy/eleventy-plugin-content-dates": "^1.0.3",
     "browserslist-to-esbuild": "^2.1.1",
     "clsx": "^2.0.0",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.4",
     "gray-matter": "^4.0.3",
     "html-escaper": "^3.0.3",
     "linkedom": "^0.18.4",
     "markdown-it": "^14.0.0",
     "preact": "^10.19.3",
     "preact-render-to-string": "^6.3.1",
-    "shiki": "^2.3.2",
+    "shiki": "^3.4.2",
     "typescript": "^5.3.3"
   }
 }
