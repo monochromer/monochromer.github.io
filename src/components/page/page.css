@@ -1,38 +1,33 @@
+@property --_user-font-size {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: false;
+}
+
+@property --_vw {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: false;
+}
+
 .page {
   --max-container-size: 780;
   --min-viewport-width: 576;
   --max-viewport-width: 1440;
 
-  --_font-size-factor: var(--font-size-factor, 1);
+  --_vw: 1vw;
+  --_unitless-viewport: calc(tan(atan2(var(--_vw) * 100, 1px)));
+
+  --_default-browser-font-size: 16;
+  --_user-font-size: 1em;
+  --_unitless-font-size: calc(tan(atan2(var(--_user-font-size), 1px)));
+  --_font-size-factor: calc(var(--_unitless-font-size) / var(--_default-browser-font-size));
+
   --_min-viewport-width: calc(var(--min-viewport-width) * var(--_font-size-factor));
   --_max-viewport-width: calc(var(--max-viewport-width) * var(--_font-size-factor));
 
-  --_clamped-viewport-width: clamp(var(--_min-viewport-width), var(--viewport-width), var(--_max-viewport-width));
+  --_clamped-viewport-width: clamp(var(--_min-viewport-width), var(--_unitless-viewport), var(--_max-viewport-width));
   --viewport-ratio: ((var(--_clamped-viewport-width) - var(--_min-viewport-width)) / (var(--_max-viewport-width) - var(--_min-viewport-width)));
-}
-
-.page_with-viewport-fallback {
-  --viewport-ratio: 0;
-
-  @media (min-width: calc((576 + (1440 - 576) * 0) * 1em / 16)) {
-    --viewport-ratio: 0;
-  }
-
-  @media (min-width: calc((576 + (1440 - 576) * 0.25) * 1em / 16)) {
-    --viewport-ratio: 0.25;
-  }
-
-  @media (min-width: calc((576 + (1440 - 576) * 0.5) * 1em / 16)) {
-    --viewport-ratio: 0.5;
-  }
-
-  @media (min-width: calc((576 + (1440 - 576) * 0.75) * 1em / 16)) {
-    --viewport-ratio: 0.75;
-  }
-
-  @media (min-width: calc((576 + (1440 - 576) * 1) * 1em / 16)) {
-    --viewport-ratio: 1;
-  }
 }
 
 .page {
