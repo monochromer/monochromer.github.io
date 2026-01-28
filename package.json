@@ -15,11 +15,11 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.0",
     "@napi-rs/canvas": "^0.1.65",
-    "@types/node": "^22.5.5",
+    "@types/node": "^24.10.9",
     "@web-alchemy/eleventy-plugin-content-dates": "^1.0.3",
     "browserslist-to-esbuild": "^2.1.1",
     "clsx": "^2.0.0",
-    "esbuild": "^0.25.4",
+    "esbuild": "^0.27.2",
     "gray-matter": "^4.0.3",
     "html-escaper": "^3.0.3",
     "linkedom": "^0.18.4",
