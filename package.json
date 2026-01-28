@@ -2,7 +2,7 @@
   "name": "monochromer.github.io",
   "type": "module",
   "engines": {
-    "node": "22"
+    "node": "24"
   },
   "scripts": {
     "start": "NODE_ENV=development eleventy --serve --watch",
